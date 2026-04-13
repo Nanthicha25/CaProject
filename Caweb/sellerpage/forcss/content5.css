@@ -1,0 +1,109 @@
+
+        .sidebar5{
+            background-color: #f8f9fa; /* สีพื้นหลังอ่อนๆ */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* ทำให้เนื้อหาอยู่กลางจอทั้งแนวตั้งและแนวนอน */
+           margin-top: 0;
+           padding-left: 100px;
+           padding-right: 100px;
+        
+            padding-top: 20px;
+            padding-bottom:40px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 40px 60px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(238, 77, 45,0.2);
+            width: 100%;
+            max-width: 600px; /* คุมความกว้าง */
+            text-align: center;
+        }
+
+        h1 {
+            color: rgb(238, 77, 45); 
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .info-section {
+            margin: 30px 0;
+            text-align: left;
+            display: inline-block; /* เพื่อให้เนื้อหาจัดกลางตาม parent ได้ง่าย */
+        }
+
+        .info-row {
+            margin: 15px 0;
+            font-size: 1.2rem;
+            display: flex;
+            gap: 20px;
+        }
+
+        .label {
+            font-weight: bold;
+            color: rgb(238, 77, 45);
+            min-width: 70px;
+        }
+
+        .link {
+            color: #007bff;
+            text-decoration: underline;
+            transition: color 0.5s;
+            
+        }
+
+        .link:hover {
+            color: rgb(238, 77, 45);
+
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border: 1.5px solid #ddd;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #555;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .icon-box:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-5px);
+            border-color: white;
+            
+        }
+        .twitter,.facebook{
+            width: 60px;
+            height: 50px;
+            object-position: center;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        .gmail{
+            width: 60px;
+            height: 60px;
+            object-position: center;
+            object-fit: cover;
+            border-radius: 12px ;
+            
+        }
+
+        
+        

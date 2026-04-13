@@ -1,0 +1,257 @@
+/* จัดการกรอบและการเว้นระยะ */
+#pageaddpro .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#pageaddpro .section-card {
+    background: #ffffff;
+    border: 1px solid #FF8B60;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+/* ส่วนหัวของแต่ละ Card (ส้มอ่อนตามแบบ) */
+#pageaddpro .section-title {
+    background-color: #FFF2E7;
+    color: #FF5722;
+    padding: 15px 20px;
+    font-weight: bold;
+    font-size: 18px;
+    border-bottom: 0.5px solid #FF8B60;
+}
+
+/* จัดระเบียบ Form Group ให้ไม่ซ้อนกัน */
+#pageaddpro .form-group {
+    margin-top: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+   
+  
+}
+
+#pageaddpro label {
+    font-weight: 600;
+    color: #333;
+}
+
+#pageaddpro input[type="text"], 
+#pageaddpro input[type="number"], 
+#pageaddpro textarea, 
+#pageaddpro select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+#pageaddpro input:focus, #pageaddpro textarea:focus {
+    border-color: #FF5722;
+}
+
+/* จัดการส่วนรูปภาพให้เป็น Grid สวยๆ */
+#pageaddpro .image-upload-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    padding: 20px;
+}
+
+#pageaddpro .upload-box {
+    aspect-ratio: 1/1;
+    border: 2px dashed #FF8B60;
+    background-color: #FFF9F5;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 12px;
+    color: #FF8B60;
+}
+
+#pageaddpro .upload-box:hover {
+    background-color: #FFF2E7;
+    transform: translateY(-2px);
+}
+
+/* ปุ่มกดด้านล่าง */
+#pageaddpro .btn-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding: 20px 0;
+}
+
+
+
+#pageaddpro .btn-outline,.btn .btn-outline {
+   font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 30px;
+    background: #f15a31;
+    color: white;
+    border: 2px solid ;
+    padding: 12px 30px;
+    border-radius: 8px;
+     transition: 0.5s;
+      cursor: pointer;
+}
+#pageaddpro .btn-outline:hover {
+   color: #f15a31;
+    background-color:white;
+}
+.back-btn{
+    font-weight: bold;
+    color: white;
+    background-color: #f15a31;
+    border-style: solid;
+    border-color: #f15a31;
+    padding: 10px;
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    transition: 0.5s;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.back-btn:hover{
+    color: #f15a31;
+    background-color:white;
+    
+    
+}
+.addphoto2{
+    border-radius: 16px;
+     padding-left: 6px;
+    padding-right: 6px;
+    padding-bottom: 2px;
+    padding-top: 1px;
+   background-color: #f15a31 ;
+    color:white;
+    border: none;
+    border-width: 1px;
+    padding-bottom: 2px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: 0.5s;
+    text-align: center;
+    
+}
+.addphoto2:hover{
+    
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+    padding-top: 3px;
+}
+.addanoterhphoto{
+    font-weight: bold;
+}
+.switch-group{
+    margin-left: 20px;
+    margin-bottom: 30px;
+}
+
+/* ตาราง */
+.variant-table {
+    width: 100%;
+    border-collapse: separate; /* เปลี่ยน */
+    border-spacing: 0;
+
+}
+
+/* เส้นขอบให้คม */
+.variant-table th,
+.variant-table td {
+    border: 1px solid #ff5a1f; /* จากจาง -> คม */
+    padding: 16px;
+    text-align: center;
+}
+
+/* หัวตาราง */
+.variant-table th {
+    background-color: #FFF9F5;
+}
+
+/* ขนาด column */
+.variant-table th:nth-child(1),
+.variant-table td:nth-child(1) {
+    width: 25%;
+}
+
+.variant-table th:nth-child(2),
+.variant-table td:nth-child(2) {
+    width: 35%; /* รูปใหญ่ขึ้น */
+}
+
+.variant-table th:nth-child(3),
+.variant-table td:nth-child(3) {
+    width: 40%;
+}
+
+/* ช่องรูปภาพ */
+.variant-img-placeholder {
+     width: 90px;
+    height: 90px;
+    border: 2px solid #f15a31;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+/* ช่อง stock */
+.stock-input {
+    width: 50px;   /* ลดจากเดิม */
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.addphoto3{
+    font-size: 20px;
+    border-radius: 20px;
+     padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 13px;
+    padding-bottom:4px;
+   background-color: #f15a31 ;
+    color:white;
+    border: none;
+    border-width: 1px;
+    padding-bottom: 2px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: 0.5s;
+    text-align: center;
+    
+}
+.addphoto3:hover{
+    font-size: 23px;
+    padding-left: 8px;
+    padding-right: 8px;
+    
+}
+.variant-table tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+.variant-table tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}

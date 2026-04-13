@@ -1,0 +1,232 @@
+/* จัดการระยะห่างของเนื้อหาย่อย */
+.sub-page {
+    width: 100%;
+    animation: fadeIn 0.3s ease-in; /* เพิ่มลูกเล่นตอนเปลี่ยนหน้าเล็กน้อย */
+}
+
+/* เอฟเฟกต์ค่อยๆ แสดงผล */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ปรับ product-grid ให้เรียกใช้ผ่าน id หน้าได้เลย */
+#page-name1, #page-name2 {
+    display: none; /* ซ่อนไว้ก่อนในตอนแรก */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 10px;
+}
+* {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+      
+        
+
+        /* ส่วนบน: ข้อมูลบูธ */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-bottom: 2px solid #eee;
+            height: 170px;
+           
+        }
+
+        .booth-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        
+        }
+
+        /* กล่อง Cutout สีเทา */
+        .cutout-box {
+            width: 120px;
+            height: 80px;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .booth-text h2 { color: #f15a31; }
+
+        .menu-title {
+            text-align: right;
+            color: #6a1b9a; /* สีม่วงตามภาพร่าง */
+        }
+
+        /* ส่วนแถบเมนู (Total, Name, Name...) */
+        .nav-bar {
+            display: flex;
+            background: white;
+            padding: 5px 10px;
+            border-bottom: 2px solid #333;
+            gap: 50px;
+            font-weight: bold;
+            color: #f15a31; 
+        }
+        .textbar1{
+            padding: 15px ;
+            border-radius: 10px;
+            cursor: pointer;
+            
+            transition: 1s;
+        }
+        .textbar1:hover{
+                   
+            transform: translateY(-5px);
+            
+        }
+
+        /* ส่วนกริดสินค้า: แสดงผล 4 คอลัมน์ */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* แบ่งเป็น 4 คอลัมน์เท่าๆ กัน */
+            gap: 10px;
+            padding: 10px 0;
+            margin-left: 4px;
+           
+        }
+
+        /* การ์ดสินค้าแต่ละชิ้น */
+        .product-card {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+
+            display: flex;
+        flex-direction: column;
+        height: 100%; /* บังคับให้สูงเท่ากับช่องของ Grid */
+        transition: 0.5s;
+        
+        }
+        .product-card:hover{
+            box-shadow: 0 1.5px 5px rgba(0, 0, 0, 0.5);
+            border-color: white;
+        }
+
+        /* พื้นที่รูปภาพ */
+        .product-image-placeholder {
+            height: 120px;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            color: #666;
+
+              height: 120px;
+            width: 100%; 
+            
+            flex-shrink: 0; /* ป้องกันรูปภาพถูกบีบตัว */
+        }
+
+        /* ส่วนราคาและสต็อกด้านล่างการ์ด */
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            font-size: 14px;
+            background-color: #fff;
+
+             margin-top: auto;
+        }
+        #addBtn, #editBtn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+}
+#editBtn{
+    font-size: 20px;
+}
+.addpro{
+    border-radius: 16px;
+     padding-left: 6px;
+    padding-right: 6px;
+    padding-bottom: 2px;
+    padding-top: 1px;
+   background-color: #f15a31 ;
+    color:white;
+    border: none;
+    border-width: 1px;
+    padding-bottom: 2px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: 0.5s;
+    text-align: center;
+    
+}
+.addpro:hover{
+    
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+.menu-panel {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 999;
+}
+
+.hidden {
+    display: none;
+}
+#menuBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: #f15a31;
+    font-size: 22px;
+    cursor: pointer;
+
+    border-radius: 8px;
+    transition: 1s;
+}
+
+#menuBtn:hover {
+    opacity: 0.5;
+
+}
+.menu-panel,.ch1{
+    background: #f15a31;
+    color: white;
+    border-style: solid;
+    border: none;
+    border-radius: 18px;
+}
+ .ch1{
+    transition: 0.6s;
+    cursor: pointer;
+ }
+.ch1:hover{
+     font-size: 16px;
+     background-color: white;
+     color: #f15a31;
+     padding: 2px;
+}
+

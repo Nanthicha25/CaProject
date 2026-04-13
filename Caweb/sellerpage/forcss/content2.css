@@ -1,0 +1,119 @@
+/* คลุมขอบเขตหน้าจัดการสินค้า */
+#pagepro{
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header และปุ่มเพิ่มสินค้าสีส้ม */
+#pageprน .admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#pagepro h1 {
+    font-size: 22px;
+    color: #333;
+}
+
+#pagepro .btn-add-product {
+    background-color: rgb(238, 77, 45); 
+    color: white;
+    border: 2px solid rgb(238, 77, 45);
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#pagepro .btn-add-product:hover {
+    background-color: white;
+    color: rgb(238, 77, 45);
+}
+
+/* ตารางรายการสินค้า */
+#pagepro .table-responsive {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+    border: 1px solid rgb(238, 77, 45); /* เส้นขอบตารางสีส้ม */
+}
+
+#pagepro .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+#pagepro .product-table th {
+    background-color: #fff3e0; /* ส้มอ่อนสำหรับหัวตาราง */
+    padding: 15px;
+    border-bottom: 2px solid rgb(238, 77, 45);
+    color: rgb(238, 77, 45);
+    font-size: 14px;
+}
+
+#pagepro .product-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+/* ส่วนของรูปภาพและชื่อในตาราง */
+#pagepro .product-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#pagepro .img-placeholder {
+    width: 40px;
+    height: 40px;
+    background: #eee;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #888;
+}
+
+/* ปุ่มดำเนินการ (แก้ไข/ลบ) */
+#pagepro .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#pagepro .action-buttons a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#pagepro .action-buttons .edit {
+    color: #007bff; /* สีน้ำเงินสำหรับแก้ไขตามภาพร่าง */
+}
+
+#pagepro .action-buttons .delete {
+    color: #ff0000; /* สีแดงสำหรับลบ */
+}
+
+#pagepro .topic{
+    font-size: 25px;
+    margin-bottom: 10px;
+    color: black;
+}
+.btn-add-product{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.product-cell{
+    color: black;
+}

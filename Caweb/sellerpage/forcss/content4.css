@@ -1,0 +1,191 @@
+#pagecon {
+    background-color: #fcfcfc;
+    min-height: 100vh;
+    padding: 0 0 40px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* แถบ Tab ด้านบน */
+#pagecon .category-tabs {
+    display: flex;
+    border-bottom: 2px solid rgb(238, 77, 45);
+    background: #fff;
+    
+}
+
+#pagecon .tab {
+    flex: 1; 
+    padding: 15px; 
+    border: none; 
+    background: none;
+    font-size: 18px; font-weight: bold; cursor: pointer;
+    border-right: 1px solid #eee;
+    transition: 0.5s;
+}
+
+#pagecon .tab:hover {
+    background-color: #fff5ee;
+    color: rgb(238, 77, 45);
+}
+
+/* ส่วนหัวรายได้ */
+#pagecon .revenue-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+#pagecon .date-filter {
+     
+    padding: 8px 15px;
+    background-color: rgb(238, 77, 45);
+    border-radius: 6px;
+    color: white;
+    transition: 0.5s;
+   border: 2px solid rgb(238, 77, 45);
+   outline: none; /* ป้องกันขอบดำซ้ำซ้อน */
+}
+#pagecon .date-filter:hover{
+    border: 2px solid rgb(238, 77, 45);  
+    color: rgb(238, 77, 45);
+    border-radius: 6px;
+    background-color: white;
+    
+
+   
+}
+#pagecon .date-filter:active {
+     outline: none; /* ป้องกันขอบดำซ้ำซ้อน */
+    bottom: none;
+    border: 2px solid rgb(238, 77, 45); 
+    border-radius: 6px;
+    color: rgb(238, 77, 45);
+   
+}
+
+#pagecon .total-revenue {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+#pagecon .orange-text {
+    color: rgb(238, 77, 45);
+}
+
+/* ส่วนกล่องเนื้อหา (Card Style) */
+#pagecon section, 
+#pagecon .chart-box, 
+#pagecon .table-box {
+    background: #fff;
+    margin: 15px 20px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 0;
+}
+
+#pagecon .section-title {
+    background: #fff;
+    margin: 0;
+    padding: 10px 15px;
+    font-size: 18px;
+    border-bottom: 2px solid #333;
+    text-align: center;
+}
+
+/* Best Seller Grid */
+#pagecon .best-seller-grid {
+
+    flex-wrap: nowrap;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px;
+
+    display: flex;               /* บังคับให้ลูกเรียงแถวหน้ากระดาน */
+    justify-content: space-around; /* กระจายช่องไฟระหว่างการ์ดให้เท่ากัน */
+    align-items: flex-start;     /* ให้ทุกการ์ดเริ่มจากขอบบนสุดพร้อมกัน */
+    padding: 30px 10px;          /* เพิ่มพื้นที่ว่างข้างใน */
+    gap: 15px;                   /* ระยะห่างระหว่างใบ */
+}
+
+#pagecon .rank-item {
+    
+   padding: 5px;
+
+   flex: 1;                     /* ให้แต่ละใบมีความกว้างเท่าๆ กัน */
+    max-width: 300px;            /* จำกัดความกว้างไม่ให้ใหญ่เกินไป */
+    display: flex;
+    flex-direction: column;      /* จัดเรียงเนื้อหาข้างในเป็นแนวตั้ง */
+    align-items: center;         /* จัดทุกอย่างให้อยู่กึ่งกลางการ์ด */
+    text-align: center
+
+}
+
+#pagecon .product-thumb {
+    width: 150px;
+    height: 150px;
+    background: #eee;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Layout แถวกลาง (กราฟ + ตารางเล็ก) */
+#pagecon .dashboard-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+}
+
+/* แผนภาพวงกลมจำลอง */
+#pagecon .pie-chart-placeholder {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#pagecon .pie-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 10px solid rgb(238, 77, 45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+/* ตาราง */
+#pagecon table {
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+
+#pagecon th {
+    background: #fff3e0;
+    color: rgb(238, 77, 45);
+    border-bottom: 2px solid #333;
+    padding: 10px;}
+   
+
+#pagecon td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+
+}
+#pagecon .rank-detail{
+    color:rgb(238, 77, 45); 
+    text-align: left;
+    font-weight: bold;
+   
+}
+#pagecon .rank-num{
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 0;
+}
