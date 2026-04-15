@@ -1,0 +1,148 @@
+/* --- ส่วนเนื้อหาฝั่งขวา (Right Content) --- */
+#pagedetail3 .container {
+    background-color: #ffffff;
+    padding: 15px;
+    
+    border-bottom: 2px solid rgb(238, 77, 45);
+    box-shadow: 0 10px 40px rgba(255, 102, 0, 0.08); /* เงาสีส้มจางๆ */
+    width: 100%;
+    position: relative;
+    
+    margin-bottom: 10px;
+}
+
+/* หัวข้อใหญ่ */
+#pagedetail3 h2 {
+    margin-top: 20px;
+    margin-left: 20px;
+    color: #333;
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 1.2;
+    border-left: 6px solid rgb(238, 77, 45);
+    padding-left: 20px;
+}
+
+
+/* ปุ่มกดยืนยัน */
+#pagedetail3 .submit-btn {
+    background-color: rgb(238, 77, 45);
+    color: #fff;
+    border: 2px solid ;
+    border-color: rgb(238, 77, 45);
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    bottom: 35px;
+    right: 10px;
+
+
+    position: relative; 
+    margin: 20px 40px;
+    align-self: flex-end; /* จัดปุ่มไปทางขวา */
+    display: block;        /* ให้ปุ่มเป็น block */
+    margin: 30px 40px 30px auto; /* บน 30px, ขวา 40px, ล่าง 30px, ซ้าย auto (ดันไปขวาสุด) */
+    transition: 0.5s;
+}
+
+#pagedetail3 .submit-btn:hover {
+    background-color: white;
+    color: rgb(238, 77, 45) ;
+}
+
+
+/* 2. Grid Layout 4 ช่อง */
+#pagedetail3 .product-grid-wrapper {
+    padding: 20px;
+    flex: 1;
+    /* ยอมให้มี scroll แนวนอนถ้าจอแคบเกินไป เพื่อไม่ให้ขอบตัด */
+    overflow-x: auto;
+}
+
+#pagedetail3 .product-grid {
+    
+    display: grid;
+    /* แบ่งเป็น 4 คอลัมน์เท่าๆ กัน */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 15px;
+    /* เพิ่ม padding รอบๆ grid เพื่อให้มองเห็นเส้นขอบของการ์ดที่อยู่ริมสุด */
+    padding: 10px; 
+    box-sizing: border-box;
+}
+
+#pagedetail3 .calc-card {
+    cursor: pointer;
+    border: solid black;
+    border-width: 2px;
+    border-radius: 10px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* ช่วยให้รูปที่อยู่ข้างในไม่ล้นขอบมน */
+    transition: 0.5s;
+}
+
+#pagedetail3 .calc-card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 102, 0, 0.4);
+}
+
+#pagedetail3 .product-cover {
+    height: 150px;
+    background-color: #eeeeee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: rgb(238, 77, 45);
+    border-bottom: 2px solid black;
+}
+
+#pagedetail3 .product-detail {
+    padding: 12px;
+    
+}
+
+#pagedetail3 .info-row {
+   font-size: 18px;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 10px;
+    
+    
+}
+
+#pagedetail3 .control-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+/* ปุ่มกดแนวตั้งสีฟ้าตามภาพ */
+#pagedetail3 .qty-group {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(238, 77, 45);
+    border-radius: 4px;
+    width: 40px;
+}
+
+#pagedetail3 .qty-btn {
+    border: none;
+    background: none;
+    color: rgb(238, 77, 45);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 2px;
+}
+
+#pagedetail3 .qty-val {
+    text-align: center;
+    border-top: 1px solid rgb(238, 77, 45);
+    border-bottom: 1px solid rgb(238, 77, 45);
+    padding: 2px 0;
+    font-weight: bold;
+}
+

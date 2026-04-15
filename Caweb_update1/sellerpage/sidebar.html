@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>sellerpage</title>
+    <link rel="stylesheet" href="forcss/sidebar.css">
+    <link rel="stylesheet" href="forcss/content1.css">
+    <link rel="stylesheet" href="forcss/content2.css">
+    <link rel="stylesheet" href="forcss/content3.css">
+    <link rel="stylesheet" href="forcss/content4.css">
+    <link rel="stylesheet" href="forcss/content5.css">
+    <link rel="stylesheet" href="forcss/content2addpro.css">
+    <link rel="stylesheet" href="forcss/popupdelete.css">
+    <link rel="stylesheet" href="forcss/history.css">
+    <link rel="stylesheet" href="forcss/history2.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- responsive -->
+</head>
+
+
+
+<body>
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <a class="nameweb" onclick="showPage('pagehome')">Caweb</a>
+        <hr class="line">
+
+        <div class="tabsidemenu">
+            <ul class="listside">
+
+
+                <li class="homepage"> <a href="#" onclick="showPage('pagehome')"><img
+                            src="../pic/pngtree-aesthetic-hand-painted-shopping-bag-png-elements-png-image_4126486-removebg-preview.png">
+                        Homepage</a></li>
+                <li class="product"> <a href="#" onclick="showPage('pagepro')"><img
+                            src="../pic/pngtree-aesthetic-hand-painted-shopping-bag-png-elements-png-image_4126486-removebg-preview.png">
+                        Product</a></li>
+                <li class="cal"> <a href="#" onclick="showPage('pagecal')"><img
+                            src="../pic/pngtree-aesthetic-hand-painted-shopping-bag-png-elements-png-image_4126486-removebg-preview.png">
+                        Calculate</a></li>
+                <li class="con"> <a href="#" onclick="showPage('pagecon')"><img
+                            src="../pic/pngtree-aesthetic-hand-painted-shopping-bag-png-elements-png-image_4126486-removebg-preview.png">
+                        Conclusion</a></li>
+                <li class="contact"> <a href="#" onclick="showPage('pagecontact')"><img
+                            src="../pic/pngtree-aesthetic-hand-painted-shopping-bag-png-elements-png-image_4126486-removebg-preview.png">
+                        Contact</a></li>
+
+
+            </ul>
+
+
+
+        </div>
+        <footer class="accposition">
+            <p class="acc">Nanthicha</p>
+        </footer>
+
+    </nav>
+
+    <!--เนื้อหาฝั่งขวาหน้าแรก-->
+    <main class="content-area">
+        <div id="pagehome" class="sidebar1">
+            <header class="header-section" id="header">
+                <button id="menuBtn">☰</button>
+
+                <div id="menuPanel" class="menu-panel hidden">
+                    <button class="ch1" onclick="setMode('bg')">Change background</button>
+                    <button class="ch1" onclick="setMode('profile')">Change profile</button>
+                    <button class="ch1" onclick="removeBg()">Delete background</button>
+                    <button class="ch1" onclick="removeProfile()">Delete profile</button>
+                </div>
+                <input type="file" id="upload" accept="image/*" hidden>
+
+                <div class="booth-info">
+                    <div class="cutout-box" id="cutout-box1">
+                        <button class="addpro">+</button>
+
+                    </div>
+                    <div class="booth-text">
+                        <p>Number: 001</p>
+                        <h2>Name: Caweb Shop</h2>
+                    </div>
+                </div>
+
+            </header>
+
+            <nav class="nav-bar">
+
+                <div onclick="showSubPage('home')" class="textbar1">Introduce</div>
+                <div onclick="showSubPage('allname1')" class="textbar1">All</div>
+                <div onclick="showSubPage('name1')" class="textbar1">Name</div>
+                <div onclick="showSubPage('name2')" class="textbar1">Name</div>
+
+            </nav>
+
+            <!-- พื้นที่แสดงผล -->
+            <div class="sub-content">
+
+                <!-- หน้า 1 -->
+                <div id="sub-home" class="sub-page">
+                    <h2>ยินดีต้อนรับ 👋</h2>
+                    <p>นี่คือหน้าแนะนำร้านของคุณ</p>
+                </div>
+
+                <!-- หน้า 2 -->
+                <div id="sub-allname1" class="sub-page" style="display:none;">
+
+                    <div class="product-grid">
+                        <div class="product-card" data-type="name1">
+                            <div class="product-image-placeholder">pic</div>
+                            <div class="product-details"> <span>Price: 100.-</span> <span>Stock: 10</span> </div>
+                        </div>
+
+                        <div class="product-card" data-type="name1">
+                            <div class="product-image-placeholder">pic</div>
+                            <div class="product-details"> <span>Price: 100.-</span> <span>Stock: 10</span> </div>
+                        </div>
+
+                        <div class="product-card" data-type="name1">
+                            <div class="product-image-placeholder">pic</div>
+                            <div class="product-details"> <span>Price: 100.-</span> <span>Stock: 10</span> </div>
+                        </div>
+
+                        <div class="product-card" data-type="name1">
+                            <div class="product-image-placeholder">pic</div>
+                            <div class="product-details"> <span>Price: 100.-</span> <span>Stock: 10</span> </div>
+                        </div>
+
+                        <div class="product-card" data-type="name1">
+                            <div class="product-image-placeholder">pic</div>
+                            <div class="product-details"> <span>Price: 100.-</span> <span>Stock: 10</span> </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- หน้า 3 -->
+                <div id="sub-name1" class="sub-page" style="display:none;">
+
+                    <div class="product-grid">
+                        <div class="product-card" data-type="name1">
+                            <div class="product-image-placeholder">pic</div>
+                            <div class="product-details"> <span>Price: 100.-</span> <span>Stock: 10</span> </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- หน้า 4 -->
+                <div id="sub-name2" class="sub-page" style="display:none;">
+                    <div class="product-grid">
+                        <div class="product-card" data-type="name1">
+                            <div class="product-image-placeholder">pic</div>
+                            <div class="product-details"> <span>Price: 100.-</span> <span>Stock: 10</span> </div>
+                        </div>
+
+                        <div class="product-card" data-type="name1">
+                            <div class="product-image-placeholder">pic</div>
+                            <div class="product-details"> <span>Price: 100.-</span> <span>Stock: 10</span> </div>
+                        </div>
+
+                        <div class="product-card" data-type="name1">
+                            <div class="product-image-placeholder">pic</div>
+                            <div class="product-details"> <span>Price: 100.-</span> <span>Stock: 10</span> </div>
+                        </div>
+
+                        <div class="product-card" data-type="name1">
+                            <div class="product-image-placeholder">pic</div>
+                            <div class="product-details"> <span>Price: 100.-</span> <span>Stock: 10</span> </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <!--เนื้อหาฝั่งขวาหน้า2-->
+        <div id="pagepro" class="sidebar2">
+
+            <header class="admin-header">
+                <h1 class="topic">List-Product</h1>
+                <button class="btn-add-product" onclick="showPage('pageaddpro')">+ Add Product</button>
+            </header>
+
+            <div class="table-responsive">
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox"></th>
+                            <th>Name Product</th>
+                            <th>Choice</th>
+                            <th class="sortable">Price <i class="fas fa-sort"></i></th>
+                            <th>Stock</th>
+                            <th class="sortable">Sales<i class="fas fa-sort"></i></th>
+                            <th>Proceed</th>
+                        </tr>
+                    </thead>
+                    <!--สินค้าที่2-->
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="product-cell">
+                                    <div class="img-placeholder">pic</div>
+                                    <span>Product names</span>
+                                </div>
+                            </td>
+                            <td>-</td>
+                            <td>100.-</td>
+                            <td>10</td>
+                            <td>50</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="edit" onclick="showPage('pageaddpro')">Edit</a>
+                                    <a href="#" class="delete" onclick="openPopup(this)">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!--สินค้าที่1-->
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="product-cell">
+                                    <div class="img-placeholder">pic</div>
+                                    <span>Product names</span>
+                                </div>
+                            </td>
+                            <td>-</td>
+                            <td>90.-</td>
+                            <td>99</td>
+                            <td>50</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="edit" onclick="showPage('pageaddpro')">Edit</a>
+                                    <a href="#" class="delete" onclick="openPopup(this)">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+
+        <!--เนื้อหาฝั่งขวาหน้า3-->
+        <div id="pagecal" class="sidebar3">
+            <nav class="category-tabs">
+                <button class="tab active" onclick="switchContent3('all-content3', this)">All</button>
+                <button class="tab" onclick="switchContent3('name1-content3', this)">Name</button>
+                <button class="tab" onclick="switchContent3('name2-content3', this)">Name</button>
+            </nav>
+
+            <div class="pagesubcontent3" id="all-content3">
+                <div class="product-grid-wrapper">
+                    <div class="product-grid">
+
+                        <!--สินค้าที่1-->
+                        <div class="calc-card" >
+                            <div class="product-cover"  onclick="showPage('pagedetail3')">pic</div>
+                            <div class="product-detail">
+                                <div class="info-row">
+                                    <span class="textprice">Price: 100.-</span>
+                                    <span class="textprice">Stock: 10</span>
+                                </div>
+                                <div class="control-section">
+                                    <div class="subtotal">Total Price 0</div>
+                                    <div class="qty-group">
+                                        <button class="qty-btn">+</button>
+                                        <span class="qty-val">0</span>
+                                        <button class="qty-btn">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--สินค้าที่2-->
+                        <div class="calc-card" >
+                            <div class="product-cover"  onclick="showPage('pagedetail3')">pic</div>
+                            <div class="product-detail">
+                                <div class="info-row">
+                                    <span class="textprice">Price: 100.-</span>
+                                    <span class="textprice">Stock: 10</span>
+                                </div>
+                                <div class="control-section">
+                                    <div class="subtotal">Total Price 0</div>
+                                    <div class="qty-group">
+                                        <button class="qty-btn">+</button>
+                                        <span class="qty-val">0</span>
+                                        <button class="qty-btn">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--สินค้าที่3-->
+                        <div class="calc-card" >
+                            <div class="product-cover"  onclick="showPage('pagedetail3')">pic</div>
+                            <div class="product-detail">
+                                <div class="info-row">
+                                    <span class="textprice">Price: 100.-</span>
+                                    <span class="textprice">Stock: 10</span>
+                                </div>
+                                <div class="control-section">
+                                    <div class="subtotal">Total Price 0</div>
+                                    <div class="qty-group">
+                                        <button class="qty-btn">+</button>
+                                        <span class="qty-val">0</span>
+                                        <button class="qty-btn">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--สินค้าที่4-->
+                        <div class="calc-card" >
+                            <div class="product-cover"  onclick="showPage('pagedetail3')">pic</div>
+                            <div class="product-detail">
+                                <div class="info-row">
+                                    <span class="textprice">Price: 100.-</span>
+                                    <span class="textprice">Stock: 10</span>
+                                </div>
+                                <div class="control-section">
+                                    <div class="subtotal">Total Price 0</div>
+                                    <div class="qty-group">
+                                        <button class="qty-btn">+</button>
+                                        <span class="qty-val">0</span>
+                                        <button class="qty-btn">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--สินค้าที่5-->
+                        <div class="calc-card" >
+                            <div class="product-cover"  onclick="showPage('pagedetail3')">pic</div>
+                            <div class="product-detail">
+                                <div class="info-row">
+                                    <span class="textprice">Price: 100.-</span>
+                                    <span class="textprice">Stock: 10</span>
+                                </div>
+                                <div class="control-section">
+                                    <div class="subtotal">Total Price 0</div>
+                                    <div class="qty-group">
+                                        <button class="qty-btn">+</button>
+                                        <span class="qty-val">0</span>
+                                        <button class="qty-btn">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!--name1-content3-->
+            <div class="pagesubcontent3" id="name1-content3" style="display:none;">
+                <div class="product-grid-wrapper">
+                    <div class="product-grid">
+
+                        <!--สินค้าที่1-->
+                        <div class="calc-card" >
+                            <div class="product-cover"  onclick="showPage('pagedetail3')">pic</div>
+                            <div class="product-detail">
+                                <div class="info-row">
+                                    <span class="textprice">Price: 100.-</span>
+                                    <span class="textprice">Stock: 10</span>
+                                </div>
+                                <div class="control-section">
+                                    <div class="subtotal">Total Price 0</div>
+                                    <div class="qty-group">
+                                        <button class="qty-btn">+</button>
+                                        <span class="qty-val">0</span>
+                                        <button class="qty-btn">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--สินค้าที่2-->
+                        <div class="calc-card" >
+                            <div class="product-cover"  onclick="showPage('pagedetail3')">pic</div>
+                            <div class="product-detail">
+                                <div class="info-row">
+                                    <span class="textprice">Price: 100.-</span>
+                                    <span class="textprice">Stock: 10</span>
+                                </div>
+                                <div class="control-section">
+                                    <div class="subtotal">Total Price 0</div>
+                                    <div class="qty-group">
+                                        <button class="qty-btn">+</button>
+                                        <span class="qty-val">0</span>
+                                        <button class="qty-btn">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--สินค้าที่3-->
+                        <div class="calc-card" >
+                            <div class="product-cover"  onclick="showPage('pagedetail3')">pic</div>
+                            <div class="product-detail">
+                                <div class="info-row">
+                                    <span class="textprice">Price: 100.-</span>
+                                    <span class="textprice">Stock: 10</span>
+                                </div>
+                                <div class="control-section">
+                                    <div class="subtotal">Total Price 0</div>
+                                    <div class="qty-group">
+                                        <button class="qty-btn">+</button>
+                                        <span class="qty-val">0</span>
+                                        <button class="qty-btn">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!--name2-content3-->
+            <div class="pagesubcontent3" id="name2-content3" style="display:none;">
+                <div class="product-grid-wrapper">
+                    <div class="product-grid">
+
+                        <!--สินค้าที่1-->
+                        <div class="calc-card" >
+                            <div class="product-cover"  onclick="showPage('pagedetail3')">pic</div>
+                            <div class="product-detail">
+                                <div class="info-row">
+                                    <span class="textprice">Price: 100.-</span>
+                                    <span class="textprice">Stock: 10</span>
+                                </div>
+                                <div class="control-section">
+                                    <div class="subtotal">Total Price 0</div>
+                                    <div class="qty-group">
+                                        <button class="qty-btn">+</button>
+                                        <span class="qty-val">0</span>
+                                        <button class="qty-btn">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--สินค้าที่2-->
+                        <div class="calc-card" >
+                            <div class="product-cover"  onclick="showPage('pagedetail3')">pic</div>
+                            <div class="product-detail">
+                                <div class="info-row">
+                                    <span class="textprice">Price: 100.-</span>
+                                    <span class="textprice">Stock: 10</span>
+                                </div>
+                                <div class="control-section">
+                                    <div class="subtotal">Total Price 0</div>
+                                    <div class="qty-group">
+                                        <button class="qty-btn">+</button>
+                                        <span class="qty-val">0</span>
+                                        <button class="qty-btn">-</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        
+
+
+
+
+
+            <footer class="calc-footer-full">
+                <div class="footer-content">
+                    <button class="btn-outline" onclick="showPage('pagehistory')">History</button>
+                    <div class="total-text">Total Price <span class="orange-text">0</span> Baht</div>
+                    <button class="btn-outline" id="confirmBtn1">Confirm</button>
+                </div>
+            </footer>
+        </div>
+        <!--popup confirm-->
+        <div id="confirmSuccessPopup" class="popup-overlay">
+            <div class="popup-box">
+                <p>Success</p>
+            </div>
+        </div>
+        <!--History page-->
+        <div id="pagehistory" class="sidebar-history" style="display:none;">
+
+            <nav class="category-tabs">
+                <button class="tab active" onclick="switchHistory('all-History', this)">All</button>
+                <button class="tab" onclick="switchHistory('name1-History', this)">Name</button>
+                <button class="tab" onclick="switchHistory('name2-History', this)">Price</button>
+            </nav>
+
+            <nav class="top-nav">
+                <button class="back-btn" onclick="showPage('pagecal')">
+                    Back
+                </button>
+                <h2 class="topic-history">Order History</h2>
+            </nav>
+
+            <div class="history-list">
+
+                <!-- ALL -->
+                <div class="history-page" id="all-History">
+                    <div class="order-card">
+
+                        <div class="order-header">
+
+                            <button class="edit-link">Edit</button>
+                            <button class="delete-link">Delete</button>
+                        </div>
+
+                        <div class="order-items">
+
+                            <div class="item-row">
+                                <div class="item-pic">Pic</div>
+                                <div class="item-info">
+                                    <p>Name: Product A</p>
+                                    <p>Quantity: 2</p>
+                                </div>
+                                <div class="item-options">
+                                    <p>Option</p>
+                                    <p>Price 200.-</p>
+                                </div>
+                            </div>
+
+                            <div class="item-row">
+                                <div class="item-pic">Pic</div>
+                                <div class="item-info">
+                                    <p>Name: Product B</p>
+                                    <p>Quantity: 1</p>
+                                </div>
+                                <div class="item-options">
+                                    <p>Option</p>
+                                    <p>Price 150.-</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="order-footer">
+                            <span class="order-time">Time : 14/04/2026 17:15</span>
+                            <span class="total_history">Total Price : <span>350</span> Baht</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- NAME1 -->
+                <div class="history-page" id="name1-History" style="display:none;">
+                    <div class="order-card">
+
+                        <div class="order-header">
+
+                            <button class="edit-link">Edit</button>
+                            <button class="delete-link">Delete</button>
+                        </div>
+
+                        <div class="order-items">
+
+                            <div class="item-row">
+                                <div class="item-pic">Pic</div>
+                                <div class="item-info">
+                                    <p>Name: Product A</p>
+                                    <p>Quantity: 2</p>
+                                </div>
+                                <div class="item-options">
+                                    <p>Option</p>
+                                    <p>Price 200.-</p>
+                                </div>
+                            </div>
+
+                            <div class="item-row">
+                                <div class="item-pic">Pic</div>
+                                <div class="item-info">
+                                    <p>Name: Product B</p>
+                                    <p>Quantity: 1</p>
+                                </div>
+                                <div class="item-options">
+                                    <p>Option</p>
+                                    <p>Price 150.-</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="order-footer">
+                            <span class="order-time">Time : 14/04/2026 17:15</span>
+                            <span class="total_history">Total Price : <span>350</span> Baht</span>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="order-card">
+
+                        <div class="order-header">
+
+                            <button class="edit-link">Edit</button>
+                            <button class="delete-link">Delete</button>
+                        </div>
+
+                        <div class="order-items">
+
+                            <div class="item-row">
+                                <div class="item-pic">Pic</div>
+                                <div class="item-info">
+                                    <p>Name: Product A</p>
+                                    <p>Quantity: 2</p>
+                                </div>
+                                <div class="item-options">
+                                    <p>Option</p>
+                                    <p>Price 200.-</p>
+                                </div>
+                            </div>
+
+                            <div class="item-row">
+                                <div class="item-pic">Pic</div>
+                                <div class="item-info">
+                                    <p>Name: Product B</p>
+                                    <p>Quantity: 1</p>
+                                </div>
+                                <div class="item-options">
+                                    <p>Option</p>
+                                    <p>Price 150.-</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="order-footer">
+                            <span class="order-time">Time : 14/04/2026 17:15</span>
+                            <span class="total_history">Total Price : <span>350</span> Baht</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Name2 -->
+                <div class="history-page" id="name2-History" style="display:none;">
+                    <div class="order-card">
+
+                        <div class="order-header">
+
+                            <button class="edit-link">Edit</button>
+                            <button class="delete-link">Delete</button>
+                        </div>
+
+                        <div class="order-items">
+
+                            <div class="item-row">
+                                <div class="item-pic">Pic</div>
+                                <div class="item-info">
+                                    <p>Name: Product A</p>
+                                    <p>Quantity: 2</p>
+                                </div>
+                                <div class="item-options">
+                                    <p>Option</p>
+                                    <p>Price 200.-</p>
+                                </div>
+                            </div>
+
+                            <div class="item-row">
+                                <div class="item-pic">Pic</div>
+                                <div class="item-info">
+                                    <p>Name: Product B</p>
+                                    <p>Quantity: 1</p>
+                                </div>
+                                <div class="item-options">
+                                    <p>Option</p>
+                                    <p>Price 150.-</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="order-footer">
+                            <span class="order-time">Time : 14/04/2026 17:15</span>
+                            <span class="total_history">Total Price : <span>350</span> Baht</span>
+                        </div>
+
+                    </div>
+
+                    <div class="order-card">
+
+                        <div class="order-header">
+                            <button class="edit-link">Edit</button>
+                            <button class="delete-link">Delete</button>
+                        </div>
+
+                        <div class="order-items">
+
+                            <div class="item-row">
+                                <div class="item-pic">Pic</div>
+                                <div class="item-info">
+                                    <p>Name: Product A</p>
+                                    <p>Quantity: 2</p>
+                                </div>
+                                <div class="item-options">
+                                    <p>Option</p>
+                                    <p>Price 200.-</p>
+                                </div>
+                            </div>
+
+                            <div class="item-row">
+                                <div class="item-pic">Pic</div>
+                                <div class="item-info">
+                                    <p>Name: Product B</p>
+                                    <p>Quantity: 1</p>
+                                </div>
+                                <div class="item-options">
+                                    <p>Option</p>
+                                    <p>Price 150.-</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="order-footer">
+                            <span class="order-time">Time : 14/04/2026 17:15</span>
+                            <span class="total_history">Total Price : <span>350</span> Baht</span>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="order-card">
+
+                        <div class="order-header">
+
+                            <button class="edit-link">Edit</button>
+                            <button class="delete-link">Delete</button>
+                        </div>
+
+                        <div class="order-items">
+
+                            <div class="item-row">
+                                <div class="item-pic">Pic</div>
+                                <div class="item-info">
+                                    <p>Name: Product A</p>
+                                    <p>Quantity: 2</p>
+                                </div>
+                                <div class="item-options">
+                                    <p>Option</p>
+                                    <p>Price 200.-</p>
+                                </div>
+                            </div>
+
+                            <div class="item-row">
+                                <div class="item-pic">Pic</div>
+                                <div class="item-info">
+                                    <p>Name: Product B</p>
+                                    <p>Quantity: 1</p>
+                                </div>
+                                <div class="item-options">
+                                    <p>Option</p>
+                                    <p>Price 150.-</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="order-footer">
+                            <span class="order-time">Time : 14/04/2026 17:15</span>
+                            <span class="total_history">Total Price : <span>350</span> Baht</span>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+    
+
+        <!--หน้าหลังจากกดภาพcontent3 -->
+        <div id="pagedetail3" style="display:none;" class="sidebar-history">
+            <div class="container">
+                <button class="back-btn" onclick="showPage('pagecal')">
+                    Back
+                </button>
+            </div>
+            <h2>Name Product<br><span style="color: #666; font-size: 0.8em;">Options</span></h2>
+
+
+            <div class="product-grid-wrapper">
+                <div class="product-grid">
+
+                    <!--สินค้าที่1-->
+                    <div class="calc-card">
+                        <div class="product-cover">pic</div>
+                        <div class="product-detail">
+                            <div class="info-row">
+                                <span class="textprice">Price: 100.-</span>
+                                <span class="textprice">Stock: 10</span>
+                            </div>
+                            <div class="control-section">
+                                <div class="subtotal">Total Price 0</div>
+                                <div class="qty-group">
+                                    <button class="qty-btn">+</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn">-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--สินค้าที่2-->
+                    <div class="calc-card">
+                        <div class="product-cover">pic</div>
+                        <div class="product-detail">
+                            <div class="info-row">
+                                <span class="textprice">Price: 100.-</span>
+                                <span class="textprice">Stock: 10</span>
+                            </div>
+                            <div class="control-section">
+                                <div class="subtotal">Total Price 0</div>
+                                <div class="qty-group">
+                                    <button class="qty-btn">+</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn">-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--สินค้าที่3-->
+                    <div class="calc-card">
+                        <div class="product-cover">pic</div>
+                        <div class="product-detail">
+                            <div class="info-row">
+                                <span class="textprice">Price: 100.-</span>
+                                <span class="textprice">Stock: 10</span>
+                            </div>
+                            <div class="control-section">
+                                <div class="subtotal">Total Price 0</div>
+                                <div class="qty-group">
+                                    <button class="qty-btn">+</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn">-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--สินค้าที่4-->
+                    <div class="calc-card">
+                        <div class="product-cover">pic</div>
+                        <div class="product-detail">
+                            <div class="info-row">
+                                <span class="textprice">Price: 100.-</span>
+                                <span class="textprice">Stock: 10</span>
+                            </div>
+                            <div class="control-section">
+                                <div class="subtotal">Total Price 0</div>
+                                <div class="qty-group">
+                                    <button class="qty-btn">+</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn">-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--สินค้าที่5-->
+                    <div class="calc-card">
+                        <div class="product-cover">pic</div>
+                        <div class="product-detail">
+                            <div class="info-row">
+                                <span class="textprice">Price: 100.-</span>
+                                <span class="textprice">Stock: 10</span>
+                            </div>
+                            <div class="control-section">
+                                <div class="subtotal">Total Price 0</div>
+                                <div class="qty-group">
+                                    <button class="qty-btn">+</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn">-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--สินค้าที่6-->
+                    <div class="calc-card">
+                        <div class="product-cover">pic</div>
+                        <div class="product-detail">
+                            <div class="info-row">
+                                <span class="textprice">Price: 100.-</span>
+                                <span class="textprice">Stock: 10</span>
+                            </div>
+                            <div class="control-section">
+                                <div class="subtotal">Total Price 0</div>
+                                <div class="qty-group">
+                                    <button class="qty-btn">+</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn">-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--สินค้าที่7-->
+                    <div class="calc-card">
+                        <div class="product-cover">pic</div>
+                        <div class="product-detail">
+                            <div class="info-row">
+                                <span class="textprice">Price: 100.-</span>
+                                <span class="textprice">Stock: 10</span>
+                            </div>
+                            <div class="control-section">
+                                <div class="subtotal">Total Price 0</div>
+                                <div class="qty-group">
+                                    <button class="qty-btn">+</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn">-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--สินค้าที่8-->
+                    <div class="calc-card">
+                        <div class="product-cover">pic</div>
+                        <div class="product-detail">
+                            <div class="info-row">
+                                <span class="textprice">Price: 100.-</span>
+                                <span class="textprice">Stock: 10</span>
+                            </div>
+                            <div class="control-section">
+                                <div class="subtotal">Total Price 0</div>
+                                <div class="qty-group">
+                                    <button class="qty-btn">+</button>
+                                    <span class="qty-val">0</span>
+                                    <button class="qty-btn">-</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <button class="submit-btn" id="confirmBtn2">Confirm</button>
+
+
+        </div>
+
+
+
+
+        <!--หน้าที่4-->
+        <div id="pagecon" class="sidebar4">
+            <nav class="category-tabs">
+                <button class="tab active"  onclick="switchContent4('all-content4', this)">All</button>
+                <button class="tab" onclick="switchContent4('name1-content4', this)">Name</button>
+                <button class="tab" onclick="switchContent4('name2-content4', this)">Name</button>
+            </nav>
+            <div class="pagesubcontent4" id="all-content4" >
+                     <div class="revenue-header">
+                         <select class="date-filter">
+                            <option>Select Time Range</option>
+                                </select>
+                                    <div class="total-revenue">
+                                    Total Revenue: <span class="orange-text">0</span> Baht
+                                    </div>
+                        </div>
+
+            <section class="best-seller-section">
+                <h2 class="section-title">Best Seller</h2>
+
+                <div class="best-seller-grid">
+
+                    <div class="rank-item">
+                        <span class="rank-num">1.</span>
+                        <div class="product-thumb">pic1</div>
+                        <div class="rank-detail">Total price : <span class="datatotal">0</span> Baht</div>
+                        <div class="rank-detail">Total quantity : <span class="datatotal">0</span></div>
+                    </div>
+
+                    <div class="rank-item">
+                        <span class="rank-num">2.</span>
+                        <div class="product-thumb">pic2</div>
+                        <div class="rank-detail">Total price : <span class="datatotal">0</span> Baht</div>
+                        <div class="rank-detail">Total quantity : <span class="datatotal">0</span></div>
+                    </div>
+
+                    <div class="rank-item">
+                        <span class="rank-num">3.</span>
+                        <div class="product-thumb">pic3</div>
+                        <div class="rank-detail">Total price : <span class="datatotal">0</span> Baht</div>
+                        <div class="rank-detail">Total quantity : <span class="datatotal">0</span></div>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="dashboard-row">
+                <div class="chart-box">
+                    <h2 class="section-title">ประเภทของ</h2>
+                    <div class="pie-chart-placeholder">
+                        <canvas id="chartAll" width="200" height="200"></canvas>
+                    </div>
+                </div>
+                <div class="table-box">
+                    <h2 class="section-title">Out of Stock Products</h2>
+                    <table class="simple-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>ชื่อ</th>
+                                <th>Choice</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <section class="daily-sales-section">
+                <h2 class="section-title">Daily Sales Report</h2>
+                <table class="full-table">
+                    <thead>
+                        <tr class="topic">
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>ชื่อ</th>
+                            <th>Price</th>
+                            <th>stock</th>
+                            <th>Quantity.</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr></tbody>
+                </table></section>
+
+         </div>
+
+            <!--Content4name1-->
+            <div class="pagesubcontent4" id="name1-content4" style="display:none;" >
+                     <div class="revenue-header">
+                         <select class="date-filter">
+                            <option>Select Time Range</option>
+                                </select>
+                                    <div class="total-revenue">
+                                    Total Revenue: <span class="orange-text">3000</span> Baht
+                                    </div>
+                        </div>
+
+            <section class="best-seller-section">
+                <h2 class="section-title">Best Seller</h2>
+
+                <div class="best-seller-grid">
+
+                    <div class="rank-item">
+                        <span class="rank-num">1.</span>
+                        <div class="product-thumb">pic1</div>
+                        <div class="rank-detail">Total price : <span class="datatotal">0</span> Baht</div>
+                        <div class="rank-detail">Total quantity : <span class="datatotal">0</span></div>
+                    </div>
+
+                    <div class="rank-item">
+                        <span class="rank-num">2.</span>
+                        <div class="product-thumb">pic2</div>
+                        <div class="rank-detail">Total price : <span class="datatotal">0</span> Baht</div>
+                        <div class="rank-detail">Total quantity : <span class="datatotal">0</span></div>
+                    </div>
+
+                    <div class="rank-item">
+                        <span class="rank-num">3.</span>
+                        <div class="product-thumb">pic3</div>
+                        <div class="rank-detail">Total price : <span class="datatotal">0</span> Baht</div>
+                        <div class="rank-detail">Total quantity : <span class="datatotal">0</span></div>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="dashboard-row">
+                <div class="chart-box">
+                    <h2 class="section-title">ประเภทของ</h2>
+                    <div class="pie-chart-placeholder">
+                        <canvas id="chartName1" width="200" height="200"></canvas>
+                    </div>
+                </div>
+                <div class="table-box">
+                    <h2 class="section-title">Out of Stock Products</h2>
+                    <table class="simple-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>ชื่อ</th>
+                                <th>Choice</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <section class="daily-sales-section">
+                <h2 class="section-title">Daily Sales Report</h2>
+                <table class="full-table">
+                    <thead>
+                        <tr class="topic">
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>ชื่อ</th>
+                            <th>Price</th>
+                            <th>stock</th>
+                            <th>Quantity.</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr></tbody>
+                </table>
+
+            </section>
+
+            </div>
+
+            <!--content4name2-->
+            <div class="pagesubcontent4" id="name2-content4" style="display:none;" >
+                     <div class="revenue-header">
+                         <select class="date-filter">
+                            <option>Select Time Range</option>
+                                </select>
+                                    <div class="total-revenue">
+                                    Total Revenue: <span class="orange-text">1000</span> Baht
+                                    </div>
+                        </div>
+
+            <section class="best-seller-section">
+                <h2 class="section-title">Best Seller</h2>
+
+                <div class="best-seller-grid">
+
+                    <div class="rank-item">
+                        <span class="rank-num">1.</span>
+                        <div class="product-thumb">pic1</div>
+                        <div class="rank-detail">Total price : <span class="datatotal">0</span> Baht</div>
+                        <div class="rank-detail">Total quantity : <span class="datatotal">0</span></div>
+                    </div>
+
+                    <div class="rank-item">
+                        <span class="rank-num">2.</span>
+                        <div class="product-thumb">pic2</div>
+                        <div class="rank-detail">Total price : <span class="datatotal">0</span> Baht</div>
+                        <div class="rank-detail">Total quantity : <span class="datatotal">0</span></div>
+                    </div>
+
+                    <div class="rank-item">
+                        <span class="rank-num">3.</span>
+                        <div class="product-thumb">pic3</div>
+                        <div class="rank-detail">Total price : <span class="datatotal">0</span> Baht</div>
+                        <div class="rank-detail">Total quantity : <span class="datatotal">0</span></div>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="dashboard-row">
+                <div class="chart-box">
+                    <h2 class="section-title">ประเภทของ</h2>
+                    <div class="pie-chart-placeholder">
+                        <canvas id="chartName2" width="200" height="200"></canvas>
+                    </div>
+                </div>
+                <div class="table-box">
+                    <h2 class="section-title">Out of Stock Products</h2>
+                    <table class="simple-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>ชื่อ</th>
+                                <th>Choice</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <section class="daily-sales-section">
+                <h2 class="section-title">Daily Sales Report</h2>
+                <table class="full-table">
+                    <thead>
+                        <tr class="topic">
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>ชื่อ</th>
+                            <th>Price</th>
+                            <th>stock</th>
+                            <th>Quantity.</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr></tbody>
+                </table>
+
+                </section>
+
+            </div>
+
+        </div>
+        
+
+        <!--หน้าที่5 ติดต่อเรา-->
+        <div id="pagecontact" class="sidebar5">
+            <div class="contact-card">
+                <h1>Contact</h1>
+
+                <div class="info-section">
+                    <div class="info-row">
+                        <span class="label">Report a Problem :</span>
+                        <a href="https://www.google.com/" class="link" target="_blank">https://www.google.com/ </a>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Suggestion :</span>
+                        <a href="https://www.google.com/" class="link" target="_blank">https://www.google.com/</a>
+                    </div>
+                </div>
+
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/" class="icon-box" target="_blank">
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <img class="twitter"
+                            src="../pic/vector-twitters-new-x-logo-dark-background-vector_883031-16.avif">
+                    </a>
+                    <a href="https://www.youtube.com/" class="icon-box" target="_blank">
+                        <i class="fa-brands fa-facebook-f"></i>
+                        <img class="facebook" src="../pic/facebook-ads.webp">
+                    </a>
+                    <a href="https://www.youtube.com/" class="icon-box" target="_blank">
+                        <i class="fa-regular fa-envelope"></i>
+                        <img class="gmail" src="../pic/google-mail-gmail-icon-logo-symbol-free-png.webp">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <!--Add Product page-->
+        <div id="pageaddpro">
+            <div class="container">
+                <nav class="top-nav">
+                    <button class="back-btn" onclick="showPage('pagepro')">
+                        <i data-lucide="chevron-left"></i> Back
+                    </button>
+                    <h2 class="topicaddpro">Add New Product</h2>
+                </nav>
+
+                <div class="container">
+
+                    <div class="section-card">
+                        <div class="section-title">Basic Information</div>
+
+                        <div class="form-group">
+                            <label class="required">Product Name</label>
+                            <input type="text" placeholder="Enter product name (e.g. Handmade Sticker Pack)">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="required">Description</label>
+                            <textarea rows="5" placeholder="Describe your product features, materials, etc."></textarea>
+                        </div>
+
+                        <div class="form-group" style="max-width: 250px;">
+                            <label class="required">Price ($)</label>
+                            <input type="number" placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-title">Product Images</div>
+                        <div class="image-upload-grid">
+                            <div class="upload-box cover-label">
+                                <i data-lucide="image-plus"></i>
+                                <span>Add Cover</span>
+                                <div class="cover-tag">Cover Photo</div>
+                            </div>
+                            <div class="upload-box">
+                                <i data-lucide="plus"></i>
+                                <span>Image 1</span>
+                            </div>
+                            <div class="upload-box">
+                                <i data-lucide="plus"></i>
+                                <span>Image 2</span>
+                            </div>
+                            <div class="upload-box">
+                                <i data-lucide="plus"></i>
+                                <span>Image 3</span>
+                            </div>
+                            <div class="upload-box">
+                                <i data-lucide="plus"></i>
+                                <span>Image 4</span>
+                            </div>
+                            <div class="upload-box">
+                                <i data-lucide="plus"></i>
+                                <button class="addphoto2">+</button>
+                                <span class="addanoterhphoto">Add</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-title">Classification</div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <label class="required">Category</label>
+                                <select>
+                                    <option value="">Select Category</option>
+                                    <option>Books</option>
+                                    <option>Postcards</option>
+                                    <option>Photocards</option>
+                                    <option>Stickers</option>
+                                    <option>Keychains</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="required">Tags</label>
+                                <select multiple style="height: 45px;">
+                                    <option>Handmade</option>
+                                    <option>Craft</option>
+                                    <option>Dolls</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sub-Tags</label>
+                            <input type="text" placeholder="Type tags and press enter">
+                        </div>
+
+                        <div class="switch-group">
+                            <label class="toggle">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                            <span style="font-size: 14px;">Enable Pre-Order</span>
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-title">Product Variations</div>
+
+                        <div
+                            style="background: #fafafa; padding: 15px; border-radius: 4px; border: 1px solid var(--border-color);">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <label style="margin:0">Variation 1</label>
+                                <i data-lucide="trash-2"
+                                    style="color: var(--text-muted); cursor: pointer; width: 18px;"></i>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" value="Theme/Color">
+                            </div>
+                            <div class="form-group">
+                                <label>Options</label>
+                                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                    <input type="text" value="Set A">
+                                    <i data-lucide="grip-vertical" style="color: #ccc;"></i>
+                                </div>
+                                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                    <input type="text" value="Set B">
+                                    <i data-lucide="grip-vertical" style="color: #ccc;"></i>
+                                </div>
+                                <button class="btn-outline"
+                                    style="width: 100%; padding: 8px; font-size: 13px; border-style: solid;">+ Add
+                                    Option</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <button class="btn-outline" style="width: 100%; padding: 12px;">+ Add Variation 2</button>
+
+                    <div class="section-card">
+                        <div class="section-title">Variation List</div>
+                        <table class="variant-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Photo</th>
+                                    <th>Stock</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>โมเดล A</td>
+                                    <td>
+                                        <div class="variant-img-placeholder">
+                                            <button class="addphoto3">+</button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="number" class="stock-input" value="0">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>โมเดล B</td>
+                                    <td>
+                                        <div class="variant-img-placeholder">
+                                            <button class="addphoto3">+</button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="number" class="stock-input" value="0">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-outline" onclick="showPage('pagepro')">Cancel</button>
+                        <button class="btn-outline" id="confirmBtn3">Save and Publish</button>
+                    </div>
+
+                </div>
+            </div>
+
+    </main>
+    </div>
+    </div>
+
+    <!-- POPUP DELETE -->
+    <div id="deletePopup" class="popup-overlay">
+        <div class="popup-box">
+            <p>Do you want to delete?</p>
+
+            <div class="popup-btns" id="popupButtons">
+                <button class="btn-cancel" onclick="closePopup()">Cancel</button>
+                <button class="btn-confirm" onclick="confirmDelete()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="successPopup" class="popup-overlay">
+        <div class="popup-box">
+            <p>Item deleted successfully</p>
+        </div>
+    </div>
+
+    </main>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</script>
+
+
+    <script >
+
+            function createPieChart(canvasId, dataArr) {
+    const ctx = document.getElementById(canvasId);
+
+    if (!ctx) return;
+
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Product A', 'Product B', 'Product C'],
+            datasets: [{
+                data: dataArr,
+                backgroundColor: [
+                    '#ee4d2d',
+                    '#ffa07a',
+                    '#ffd4c4'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+
+        let currentRow = null;
+
+        function openPopup(btn) {
+            currentRow = btn.closest("tr");
+            document.getElementById("deletePopup").style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById("deletePopup").style.display = "none";
+        }
+
+        function confirmDelete() {
+            // ลบ row
+            if (currentRow) {
+                currentRow.remove();
+            }
+
+            // ปิด popup แรก
+            document.getElementById("deletePopup").style.display = "none";
+
+            // เปิด popup สำเร็จ
+            const success = document.getElementById("successPopup");
+            success.style.display = "flex";
+
+            // หน่วง → fade out
+            setTimeout(() => {
+                success.classList.add("fade-out");
+
+                setTimeout(() => {
+                    success.style.display = "none";
+                    success.classList.remove("fade-out");
+                }, 500);
+
+            }, 1200);
+        }
+
+        // ฟังก์ชันสำหรับแสดง Popup แล้วจางหายไปของ confirm
+        function showTemporaryPopup(popupId) {
+            const popup = document.getElementById(popupId);
+            popup.style.display = "flex";
+
+            // รอ 1.2 วินาทีแล้วเริ่มจางหาย
+            setTimeout(() => {
+                popup.classList.add("fade-out");
+
+                // หลังจากจางหาย (0.5 วินาที) ให้ซ่อน element
+                setTimeout(() => {
+                    popup.style.display = "none";
+                    popup.classList.remove("fade-out");
+                }, 500);
+            }, 1200);
+        }
+
+        // ผูกเหตุการณ์ตอนกดปุ่ม Confirm
+        document.querySelectorAll("[id^='confirmBtn']").forEach(btn => {
+    btn.onclick = () => showTemporaryPopup("confirmSuccessPopup");
+});
+
+        function showPage(pageId) {
+            const pages = document.querySelectorAll(
+    "#pagehome, #pagepro, #pagecal, #pagecon, #pagecontact, #pagehistory, #pagedetail3, #pageaddpro"
+);          
+            
+
+            pages.forEach(p => {
+                p.style.display = "none";
+                p.style.opacity = 0;
+            });
+
+            const active = document.getElementById(pageId);
+            active.style.display = "block";
+
+            setTimeout(() => {
+                active.style.opacity = 1;
+
+                if (pageId === 'pagecon') {
+            const firstTab = active.querySelector('.tab');
+            switchContent4('all', firstTab);
+        }
+            }, 10);
+        }
+
+        //history page
+        function switchHistory(type, btn) {
+            const pages = document.querySelectorAll('.history-page');
+            const tabs = document.querySelectorAll('#pagehistory .tab');
+
+            // ซ่อนทุกหน้า
+            pages.forEach(p => p.style.display = 'none');
+
+            // แสดงหน้าที่เลือก
+            document.getElementById(type).style.display = 'block';
+
+            // active tab
+            tabs.forEach(tab => tab.classList.remove('active'));
+            btn.classList.add('active');
+        }
+        //content3
+        function switchContent3(type, btn) {
+    const pages = document.querySelectorAll('.pagesubcontent3');
+    const tabs = document.querySelectorAll('#pagecal .tab');
+
+    // 1. ลบ Class active ออกจากทุกหน้า และสั่งซ่อนด้วย display ก่อนเพื่อความชัวร์
+    pages.forEach(p => {
+        p.classList.remove('active');
+        p.style.display = 'none'; // ปิดหน้าอื่นทิ้งไปก่อน
+    });
+
+    // 2. ดึงหน้าที่จะแสดง
+    const targetPage = document.getElementById(type);
+    if (targetPage) {
+        targetPage.style.display = 'block'; // เปิด display
+        // ใช้ requestAnimationFrame เพื่อให้ Transition ทำงานได้สมูท
+        requestAnimationFrame(() => {
+            targetPage.classList.add('active'); // ใส่ class เพื่อให้ opacity: 1 และเลื่อนขึ้น
+        });
+    }
+
+    // 3. จัดการปุ่ม Tab
+    tabs.forEach(tab => tab.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+}
+        //content4
+       function switchContent4(type, btn) {
+    const pages = document.querySelectorAll('.pagesubcontent4');
+    const tabs = document.querySelectorAll('#pagecon .tab');
+
+    pages.forEach(p => {
+        p.classList.remove('active');
+        p.style.display = 'none';
+    });
+
+   
+    const targetId = type.includes('-content4') ? type : type + '-content4';
+    const targetPage = document.getElementById(targetId);
+
+    if (targetPage) {
+        targetPage.style.display = 'block';
+        requestAnimationFrame(() => {
+            targetPage.classList.add('active');
+        });
+    }
+
+    tabs.forEach(tab => tab.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+}
+
+
+        function showSubPage(page) {
+    const pages = document.querySelectorAll('.sub-page');
+    pages.forEach(p => p.style.display = 'none');
+    document.getElementById('sub-' + page).style.display = 'block';
+}
+
+        window.onload = function () {
+            showPage("pagehome");// เปิดหน้าแรก
+            showSubPage("home");
+            
+
+            createPieChart("chartAll", [30, 50, 20]);
+            createPieChart("chartName1", [60, 20, 20]);
+            createPieChart("chartName2", [10, 70, 20]);
+            // ==============================
+            // 🔹 ดึง element จาก HTML
+            // ==============================
+            const upload = document.getElementById("upload");           // input เลือกรูป
+            const header = document.getElementById("header");           // header (พื้นหลัง)
+            const cutoutBox = document.getElementById("cutout-box1");   // กล่องโปรไฟล์
+            const menuBtn = document.getElementById("menuBtn");         // ปุ่ม ☰
+            const menuPanel = document.getElementById("menuPanel");     // เมนู popup
+            const addpro = document.querySelector(".addpro");           // ปุ่ม + โปรไฟล์
+
+
+
+            // ==============================
+            // 🔹 ตัวแปรเก็บโหมด
+            // bg = เปลี่ยนพื้นหลัง
+            // profile = เปลี่ยนโปรไฟล์
+            // ==============================
+            let mode = "";
+
+            // ==============================
+            // 🔹 เปิด/ปิดเมนู ☰
+            // ==============================
+            menuBtn.onclick = () => {
+                menuPanel.classList.toggle("hidden");
+            };
+
+            // ==============================
+            // 🔹 ฟังก์ชันจากเมนู (ต้องใช้ window เพื่อเรียกจาก HTML)
+            // ==============================
+
+            // เลือกโหมด
+            window.setMode = function (m) {
+                mode = m;
+                upload.click(); // เปิด file picker
+            };
+
+            // ลบพื้นหลัง
+            window.removeBg = function () {
+                header.style.backgroundImage = "none";
+            };
+
+            // ลบโปรไฟล์
+            window.removeProfile = function () {
+                cutoutBox.style.backgroundImage = "none";
+                addpro.style.display = "block"; // เอาปุ่ม + กลับมา
+            };
+
+            // ==============================
+            // 🔹 กดปุ่ม + (โปรไฟล์)
+            // ==============================
+            addpro.onclick = () => {
+                mode = "profile";
+                upload.click();
+            };
+
+            // ==============================
+            // 🔹 เลือกรูปภาพ
+            // ==============================
+            upload.onchange = function () {
+
+                const file = this.files[0];
+                if (!file) return;
+
+                const url = URL.createObjectURL(file);
+
+                // ===== เปลี่ยนพื้นหลัง =====
+                if (mode === "bg") {
+                    header.style.backgroundImage = `url(${url})`;
+                    header.style.backgroundSize = "cover";
+                    header.style.backgroundPosition = "center";
+                }
+
+                // ===== เปลี่ยนโปรไฟล์ =====
+                else if (mode === "profile") {
+                    cutoutBox.style.backgroundImage = `url(${url})`;
+                    cutoutBox.style.backgroundSize = "cover";
+                    cutoutBox.style.backgroundPosition = "center";
+
+                    addpro.style.display = "none"; // ซ่อนปุ่ม +
+                }
+
+                // reset mode
+                mode = "";
+            };
+
+        };
+    </script>
+
+
+</body>
+
+
+</html>

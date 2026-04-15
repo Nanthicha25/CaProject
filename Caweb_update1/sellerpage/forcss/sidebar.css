@@ -1,0 +1,107 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+.line{
+    margin-top:0 ;
+    color: white;
+    width: 160px;
+}
+
+.sidebar{
+    width: 200px; /* ความกว้าง */
+    background: rgb(238, 77, 45); /* สีพื้น */
+    position: fixed;
+    height: 100%;
+   padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    left: 0;}
+
+.sidebar a{
+    color: white;
+    text-decoration: none;
+   
+    
+}
+
+.nameweb{
+    font-size: 25px;
+    padding: 15px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.nameweb a{
+    margin-bottom: 0;
+}
+.tabsidemenu{
+    position: relative;
+    width: 100%;
+     margin-top: 7px;
+     flex: 1;
+}
+.homepage,.product,.cal,.con,.contact{
+   font-size: 14px;
+    display: flex;
+   border-radius: 30px;
+   width: 100%;
+   padding: 4px;
+   border-radius: 26px;
+   transition: background 0.6s,font-size 1s,color 1s,width 1s,height 1s;
+   cursor: pointer;
+   margin-left: 0;
+   text-align: top;
+   
+
+
+}
+
+.homepage:hover ,.product:hover,.cal:hover,.con:hover,.contact:hover{
+     
+    background: white;
+    font-size: 17px;
+    
+}
+
+
+.homepage:hover a,.product:hover a,.cal:hover a,.con:hover a,.contact:hover a{
+    color: rgb(238, 77, 45);
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+    
+  
+}
+.acc{
+    
+  font-size: 14px;
+    color: white;
+   padding: 16px;
+   margin-left: 20px;
+   width: 100%;
+
+}
+.sidebar img{
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    object-fit: cover;
+    object-position: center;
+
+}
+.content-area{
+    margin-left: 200px;
+    margin-top: 0;
+    top: 0;
+    padding: 0 0 0 0; /* บน 0, ขวา 20, ล่าง 20, ซ้าย 20 */
+}
+.content-area > div {
+    transition: opacity 0.3s ease;
+}
+
