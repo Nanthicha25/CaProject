@@ -1,13 +1,18 @@
+//src/Seller/SellerCaloptionproduct.jsx
 import React, { useState, useEffect } from "react";
+import { useLanguage } from '../LanguageContext';
 
 const SellerCalOptionProduct = ({ product, onConfirm, onCancel, currentCart = [] }) => {
+  const { t } = useLanguage();
   const [quantities, setQuantities] = useState({});
+  const [alertPopup, setAlertPopup] = useState({ isOpen: false, type: '', message: '' });
 
   useEffect(() => {
     if (product && currentCart.length > 0) {
       const initialQty = {};
       currentCart.forEach(item => {
-        if (item.product_id === product.id && item.variation && item.option) {
+        // [จุดที่แก้ที่ 1] เปลี่ยนจาก product.id เป็น product.product_id ให้ตรงกับ DB
+        if (item.product_id === product.product_id && item.variation && item.option) {
           initialQty[`${item.variation}|${item.option}`] = item.quantity;
         }
       });
@@ -17,6 +22,23 @@ const SellerCalOptionProduct = ({ product, onConfirm, onCancel, currentCart = []
 
   if (!product || !product.variations) return null;
 
+  // [จุดที่แก้ที่ 2] เขียนฟังก์ชันจัดกลุ่ม Variation ใหม่ เนื่องจากใน DB เก็บเป็น Array ชั้นเดียว 
+  // แต่ UI ต้องการแบบแยกกลุ่ม (variation_name -> option_name)
+  const groupedVariationsArray = Object.values(
+    product.variations.reduce((acc, curr) => {
+      const varName = curr.variation_name;
+      if (!acc[varName]) {
+        acc[varName] = { name: varName, options: [] };
+      }
+      acc[varName].options.push({
+        name: curr.option_name,
+        stock: curr.stock,
+        image: curr.image
+      });
+      return acc;
+    }, {})
+  );
+
   const updateQuantity = (varName, optName, stock, delta) => {
     const key = `${varName}|${optName}`;
     const current = quantities[key] || 0;
@@ -24,7 +46,11 @@ const SellerCalOptionProduct = ({ product, onConfirm, onCancel, currentCart = []
 
     if (newQty < 0) newQty = 0;
     if (newQty > stock) {
-      alert(`สินค้านี้เหลือสต็อกเพียง ${stock} ชิ้น`);
+      setAlertPopup({
+        isOpen: true,
+        type: 'error',
+        message: `${t('stockLimitAlert')} ${stock} ${t('unitPieces')}`
+      });
       newQty = stock;
     }
 
@@ -41,7 +67,7 @@ const SellerCalOptionProduct = ({ product, onConfirm, onCancel, currentCart = []
       if (qty > 0) {
         const [varName, optName] = key.split('|');
         selectedItems.push({
-          product_id: product.id,
+          product_id: product.product_id, // [จุดที่แก้ที่ 3] เปลี่ยนจาก product.id เป็น product.product_id
           name: product.name,
           price: product.price,
           variation: varName,
@@ -64,10 +90,10 @@ const SellerCalOptionProduct = ({ product, onConfirm, onCancel, currentCart = []
             <h2 className="text-2xl font-black text-gray-800 border-l-4 border-purple-600 pl-4 flex items-center gap-2">
               {product.name}
             </h2>
-            <p className="ml-5 mt-1 text-sm text-gray-500">กรุณาเลือกตัวเลือกสินค้าที่ต้องการ</p>
+            <p className="ml-5 mt-1 text-sm text-gray-500">{t('selectOptionsGuide')}</p>
           </div>
           <button 
-            className="w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-400 hover:text-white hover:bg-red-500 rounded-full transition-colors text-xl font-bold" 
+            className="w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-400 hover:text-white hover:bg-gray-300 rounded-full transition-colors text-xl font-bold" 
             onClick={onCancel}
           >
             ✖
@@ -76,7 +102,8 @@ const SellerCalOptionProduct = ({ product, onConfirm, onCancel, currentCart = []
 
         {/* Body (Variations) */}
         <div className="p-6 flex-1 overflow-x-auto">
-          {product.variations.map((variation, vIndex) => (
+          {/* [จุดที่แก้ที่ 4] เปลี่ยนจาก product.variations.map เป็น groupedVariationsArray.map */}
+          {groupedVariationsArray.map((variation, vIndex) => (
             <div key={vIndex} className="mb-8 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
               <h3 className="text-lg font-bold text-purple-600 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
                 <span>🏷️</span> {variation.name}
@@ -90,10 +117,10 @@ const SellerCalOptionProduct = ({ product, onConfirm, onCancel, currentCart = []
                   return (
                     <div className="bg-white border-2 border-gray-100 rounded-xl flex flex-col overflow-hidden transition-all duration-300 hover:border-purple-300 hover:shadow-md" key={oIndex}>
                       <div 
-                        className="h-28 bg-gray-100 flex items-center justify-center text-xs text-gray-400 bg-cover bg-center border-b border-gray-100" 
+                        className="w-full aspect-square bg-gray-100 flex items-center justify-center text-xs text-gray-400 bg-cover bg-center border-b border-gray-100" 
                         style={opt.image ? { backgroundImage: `url(${opt.image})` } : {}}
                       >
-                        {!opt.image && "No Image"}
+                        {!opt.image && "t('noImage')"}
                       </div>
                       
                       <div className="p-3 flex-1 flex flex-col">
@@ -101,24 +128,30 @@ const SellerCalOptionProduct = ({ product, onConfirm, onCancel, currentCart = []
                           {opt.name}
                         </div>
                         <div className="text-xs text-gray-500 mb-3 bg-gray-50 inline-block px-2 py-0.5 rounded w-fit">
-                          คงเหลือ: {opt.stock}
+                          {t('stockLabel')} {opt.stock}
                         </div>
                         
                         <div className="flex justify-between items-end mt-auto">
                           <div></div> 
+                          
                           {/* ส่วนของปุ่มที่ปรับเป็นแนวนอน */}
-                          <div className="flex items-center border-2 border-purple-200 rounded-md bg-white w-fit">
+                          <div className="flex items-center border-2 border-purple-200 rounded-md bg-white max-w-full">
                             <button 
-                              className="text-purple-600 font-bold cursor-pointer px-3 py-1 hover:bg-purple-100 transition-colors rounded-l-sm" 
+                              className="text-purple-600 text-lg md:text-xl font-bold cursor-pointer px-2 md:px-3 py-1 hover:bg-purple-100 transition-colors rounded-l-sm" 
                               onClick={() => updateQuantity(variation.name, opt.name, opt.stock, -1)}
                             >
                               -
                             </button>
-                            <div className="text-center border-x-2 border-purple-200 px-4 py-0.5 text-sm font-bold text-gray-700 bg-gray-50">
+                            <div className="text-center border-x-2 border-purple-200 px-2 md:px-4 py-0.5 text-sm md:text-base font-bold text-gray-700 bg-gray-50 min-w-[32px] md:min-w-[40px]">
                               {currentQty}
                             </div>
                             <button 
-                              className="text-purple-600 font-bold cursor-pointer px-3 py-1 hover:bg-purple-100 transition-colors rounded-r-sm" 
+                              className={`text-lg md:text-xl font-bold px-2 md:px-3 py-1 rounded-r-sm transition-colors ${
+                                opt.stock <= 0 || currentQty >= opt.stock
+                                  ? "text-gray-300 cursor-not-allowed" 
+                                  : "text-purple-600 cursor-pointer hover:bg-purple-100"
+                              }`}
+                              disabled={opt.stock <= 0 || currentQty >= opt.stock}
                               onClick={() => updateQuantity(variation.name, opt.name, opt.stock, 1)}
                             >
                               +
@@ -140,10 +173,34 @@ const SellerCalOptionProduct = ({ product, onConfirm, onCancel, currentCart = []
             className="bg-purple-600 text-white border-2 border-purple-600 px-10 py-3 rounded-xl font-bold hover:bg-white hover:text-purple-600 transition-colors shadow-md text-lg" 
             onClick={handleSubmit}
           >
-            ยืนยันการเลือก
+            {t('confirmSelection')}
           </button>
         </div>
       </div>
+      {alertPopup.isOpen && (
+        <div className="fixed inset-0 z-[1100] flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+          <div className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl flex flex-col items-center text-center transform transition-all scale-100 animate-fade-in">
+            <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-5 text-2xl font-black ${
+                alertPopup.type === 'success' ? 'bg-green-100 text-green-500' : 'bg-red-100 text-red-500'
+              }`}>
+              {alertPopup.type === 'success' ? '✓' : '✕'}
+            </div>
+            <h3 className="text-xl font-bold text-gray-800 mb-2">
+              {alertPopup.type === 'success' ? t('popupSuccess') : t('popupError')}
+            </h3>
+            <p className="text-gray-600 mb-8">{alertPopup.message}</p>
+            <button 
+              onClick={() => setAlertPopup({ isOpen: false, type: '', message: '' })} 
+              className={`w-full font-bold py-3.5 rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 text-white ${
+                  alertPopup.type === 'success' ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600'
+                }`}
+            >
+              {t('popupClose')}
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

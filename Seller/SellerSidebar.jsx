@@ -1,13 +1,15 @@
 // src/Seller/SellerSidebar.jsx
 import React from 'react';
+import { useLanguage } from '../LanguageContext';
 
 function SellerSidebar({ isOpen, setIsOpen, currentPage, setCurrentPage }) {
+  const { t } = useLanguage();
   const menuItems = [
-    { id: 'homepage', label: 'Homepage', icon: '🏠' },
-    { id: 'product', label: 'Product', icon: '📦' },
-    { id: 'calculate', label: 'Calculate', icon: '🧮' },
-    { id: 'conclusion', label: 'Conclusion', icon: '📊' },
-    { id: 'contact', label: 'Contact us', icon: '📞' }
+    { id: 'homepage', label: t('menuHomepage'), icon: '🏠' },
+    { id: 'product', label: t('menuProduct'), icon: '📦' },
+    { id: 'calculate', label: t('menuCalculate'), icon: '🧮' },
+    { id: 'conclusion', label: t('menuConclusion'), icon: '📊' },
+    { id: 'contact', label: t('menuContact'), icon: '📞' }
   ];
 
   return (
@@ -27,7 +29,7 @@ function SellerSidebar({ isOpen, setIsOpen, currentPage, setCurrentPage }) {
         }`}
       >
         <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-purple-50">
-          <h2 className="text-xl font-black text-purple-600">Creator Panel</h2>
+          <h2 className="text-xl font-black text-purple-600">{t('creatorPanel')}</h2>
           <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-purple-600 font-bold p-1">
             ✕
           </button>

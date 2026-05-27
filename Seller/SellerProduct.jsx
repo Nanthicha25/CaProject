@@ -1,42 +1,40 @@
+// src/Seller/SellerProduct.jsx
 import React, { useState, useEffect } from 'react';
 import SellerAddProduct from './SellerAddproduct';
-import { db } from '../firebase'; // ตรวจสอบ path ไฟล์ firebase.js ให้ถูกต้อง
-import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
+import { collection, getDocs, query, where, doc, deleteDoc } from 'firebase/firestore';
+import { useLanguage } from '../LanguageContext';
 
 const DEFAULT_PRODUCT = "https://placehold.co/400x400/f3f4f6/9ca3af?text=Product";
 
 function SellerProduct({ user, eventData }) {
+  const { t } = useLanguage();
   const [isAdding, setIsAdding] = useState(false);
   const [editingId, setEditingId] = useState(null);
   
-  // State สำหรับเก็บข้อมูลสินค้าจาก Firestore
   const [myProducts, setMyProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-    // --- ส่วนที่เพิ่ม: State สำหรับ Modal ลบ ---
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [deleteTarget, setDeleteTarget] = useState(null);
+  // 1. เพิ่ม State สำหรับจัดการ Popup ลบสินค้า
+  const [deleteModal, setDeleteModal] = useState({ isOpen: false, productId: null, productName: "" });
+  const [isDeleting, setIsDeleting] = useState(false); // ไว้ทำปุ่มหมุนๆ ตอนกำลังลบ
 
-  // ดึงข้อมูลสินค้าจาก Firestore
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const querySnapshot = await getDocs(collection(db, "booths"));
-        let allMyProducts = [];
+        const q = query(
+          collection(db, "products"),
+          where("creator", "==", user?.username?.trim())
+        );
         
-        querySnapshot.forEach((doc) => {
-          const booth = doc.data();
-          if (booth.products) {
-            // กรองเอาเฉพาะสินค้าที่ creator ตรงกับชื่อคนที่ล็อกอิน (ไม่เห็นของคนอื่นในบูธ)
-            const myItems = booth.products.filter(p => p.creator?.trim() === user?.username?.trim());
-            allMyProducts = [...allMyProducts, ...myItems];
-          }
-        });
+        const querySnapshot = await getDocs(q);
+        const productsList = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
         
-        // ลบสินค้าที่ ID ซ้ำกันออก (เผื่อกรณีข้อมูลซ้ำซ้อน)
-        const uniqueProducts = Array.from(new Map(allMyProducts.map(item => [item.id, item])).values());
-        setMyProducts(uniqueProducts);
+        setMyProducts(productsList);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -49,12 +47,42 @@ function SellerProduct({ user, eventData }) {
     }
   }, [user]);
 
-  // ถ้ามีการกดเพิ่ม หรือ แก้ไข ให้แสดงหน้า SellerAddProduct
+  // 2. ฟังก์ชันเรียกเปิด Popup
+  const openDeleteModal = (docId, productName) => {
+    setDeleteModal({ isOpen: true, productId: docId, productName: productName });
+  };
+
+  // 3. ฟังก์ชันปิด Popup
+  const closeDeleteModal = () => {
+    if (!isDeleting) {
+      setDeleteModal({ isOpen: false, productId: null, productName: "" });
+    }
+  };
+
+  // 4. ฟังก์ชันยืนยันการลบ (ทำงานเมื่อกดปุ่ม "ลบ" ใน Popup)
+  const executeDelete = async () => {
+    if (!deleteModal.productId) return;
+    
+    setIsDeleting(true);
+    try {
+      await deleteDoc(doc(db, "products", deleteModal.productId));
+      setMyProducts(prev => prev.filter(product => product.id !== deleteModal.productId));
+      
+      // ปิด Popup หลังลบเสร็จ
+      setDeleteModal({ isOpen: false, productId: null, productName: "" });
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      alert(`${t('errorDelete')}`); // หรือจะเปลี่ยนเป็น Popup แจ้ง error อีกตัวก็ได้
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   if (isAdding || editingId) {
     return (
       <SellerAddProduct 
         user={user} 
-        eventData={eventData} // ส่ง eventData ไปเผื่อไฟล์ลูกยังต้องใช้
+        eventData={eventData}
         editingProductId={editingId} 
         onBack={() => {
           setIsAdding(false);
@@ -64,147 +92,208 @@ function SellerProduct({ user, eventData }) {
     );
   }
 
-
-
-  // ฟังก์ชันเมื่อกดปุ่มลบในตาราง
-  const handleDeleteClick = (product) => {
-    setDeleteTarget(product);
-    setIsModalOpen(true);
-  };
-
-  // ฟังก์ชันยืนยันการลบจริง
-  const confirmDelete = async () => {
-    if (!deleteTarget) return;
-    try {
-      // อ้างอิงไปยัง Document ของ Booth นั้นๆ (ใช้ boothId ที่เก็บไว้ตอน Fetch)
-      const boothRef = doc(db, "booths", deleteTarget.boothId);
-      
-      await updateDoc(boothRef, {
-        products: arrayRemove(deleteTarget) // ลบ Object สินค้าที่ตรงกันออกจาก Array
-      });
-
-      // อัปเดต UI ทันที
-      setMyProducts(prev => prev.filter(p => p.id !== deleteTarget.id));
-      setIsModalOpen(false);
-      setDeleteTarget(null);
-    } catch (error) {
-      console.error("Error deleting:", error);
-      alert("ไม่สามารถลบข้อมูลได้");
-    }
-  };
-
-
   return (
-    <div className="p-4 md:p-8 bg-gray-50 min-h-screen font-sans">
+    <div className="p-4 md:p-8 bg-gray-50 min-h-screen font-sans relative">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">จัดการสินค้า (Inventory)</h1>
-          <p className="text-gray-500 mt-1">สินค้าทั้งหมดของ {user.username}</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">{t('manageProducts')}</h1>
+          <p className="text-gray-500 mt-1">{t('allProductsOf')} {user.username}</p>
         </div>
         <button onClick={() => setIsAdding(true)} className="bg-purple-600 text-white border-2 border-purple-600 px-5 py-2.5 rounded-lg font-bold hover:bg-white hover:text-purple-600 transition duration-300 shadow-sm w-full md:w-auto whitespace-nowrap flex justify-center items-center gap-2">
-          <span className="text-xl leading-none">+</span> เพิ่มสินค้าใหม่
+          <span className="text-xl leading-none">+</span> {t('addNewProductBtn')}
         </button>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-purple-200 overflow-hidden">
+      {/* ส่วนที่เพิ่มใหม่: UI สำหรับมือถือ */}
+      <div className="md:hidden flex flex-col gap-4 mb-8">
+        {loading ? (
+          <div className="flex justify-center items-center gap-2 p-10 text-purple-500 font-bold bg-white rounded-xl shadow-sm border border-purple-200">
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-purple-500"></div>
+            {t('loadingProducts')}
+          </div>
+        ) : myProducts.length === 0 ? (
+          <div className="p-10 text-center text-gray-400 font-medium bg-white rounded-xl shadow-sm border border-purple-200">{t('noProducts')}</div>
+        ) : (
+          myProducts.map((product) => {
+            const hasVariations = product.has_variations && product.variations?.length > 0;
+            const uniqueVariationsCount = hasVariations ? new Set(product.variations.map(v => v.variation_name)).size : 0;
+            const optionCount = hasVariations ? product.variations.length : 0;
+            
+            return (
+              <div key={`mobile-${product.id}`} className="bg-white rounded-[1.5rem] shadow-sm border border-purple-50 p-5 flex flex-col relative">
+                
+                <div className="absolute top-5 right-5 flex flex-col items-end gap-3">
+                  <button 
+                    onClick={() => setEditingId(product.product_id || product.id)} 
+                    className="text-blue-500 font-black text-sm hover:opacity-70 transition"
+                  >
+                    {t('editBtn')}
+                  </button>
+                  <button 
+                    // 5. เปลี่ยนมาเรียกใช้ openDeleteModal แทน
+                    onClick={() => openDeleteModal(product.id, product.name)}
+                    className="text-red-500 font-black text-sm hover:opacity-70 transition"
+                  >
+                    {t('deleteBtnp')}
+                  </button>
+                </div>
+
+                <div className="flex gap-4 items-start mb-6 pr-16">
+                  <img 
+                    src={product.cover_image || DEFAULT_PRODUCT} 
+                    alt={product.name} 
+                    className="w-[72px] h-[72px] rounded-xl object-cover bg-pink-100 shrink-0"
+                    onError={(e) => { e.target.src = DEFAULT_PRODUCT }}
+                  />
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-black text-gray-800 text-lg leading-tight truncate" title={product.name}>
+                      {product.name}
+                    </h3>
+                    {product.preorder && (
+                      <span className="text-[10px] text-orange-500 font-bold bg-orange-100 px-2 py-0.5 rounded-full inline-block mt-1">
+                        PRE-ORDER
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  <div className="flex justify-between items-center font-bold text-gray-400 text-sm">
+                    <span className="uppercase">{t('colVariation')}:</span>
+                    <span className="text-gray-600 font-medium">{uniqueVariationsCount > 0 ? uniqueVariationsCount : "-"}</span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center font-bold text-gray-400 text-sm">
+                    <span className="uppercase">{t('colOption')}:</span>
+                    <span className="text-gray-600 font-medium">{optionCount > 0 ? optionCount : "-"}</span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center font-bold text-gray-400 text-sm mt-2">
+                    <span className="uppercase">{t('colPrice')}:</span>
+                    <span className="text-purple-500 font-black text-2xl">฿{product.price}</span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center font-bold text-gray-400 text-sm mt-[-4px]">
+                    <span className="uppercase">{t('colStock')}:</span>
+                    <span className={`font-black text-xl ${product.total_stock === 0 ? 'text-red-500' : 'text-gray-800'}`}>
+                      {product.total_stock || 0}
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            );
+          })
+        )}
+      </div>
+
+      {/* ซ่อนตารางเดิมบนมือถือ */}
+      <div className="hidden md:block bg-white rounded-xl shadow-sm border border-purple-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[700px]">
             <thead>
               <tr>
-                <th className="bg-purple-50 p-4 border-b-2 border-purple-400 text-purple-700 font-bold text-sm whitespace-nowrap">สินค้า (Product)</th>
-                <th className="bg-purple-50 p-4 border-b-2 border-purple-400 text-purple-700 font-bold text-sm whitespace-nowrap">ตัวเลือกสินค้า (Product)</th>
-                <th className="bg-purple-50 p-4 border-b-2 border-purple-400 text-purple-700 font-bold text-sm whitespace-nowrap">ราคา (Price)</th>
-                <th className="bg-purple-50 p-4 border-b-2 border-purple-400 text-purple-700 font-bold text-sm whitespace-nowrap">สต็อก (Stock)</th>
-                <th className="bg-purple-50 p-4 border-b-2 border-purple-400 text-purple-700 font-bold text-sm whitespace-nowrap text-center">จัดการ (Actions)</th>
+                <th className="bg-purple-50 p-4 border-b-2 border-purple-400 text-purple-700 font-bold text-sm whitespace-nowrap">{t('colProduct')}</th>
+                <th className="bg-purple-50 p-4 border-b-2 border-purple-400 text-purple-700 font-bold text-sm whitespace-nowrap text-center">{t('colImage')}</th>
+                <th className="bg-purple-50 p-4 border-b-2 border-purple-400 text-purple-700 font-bold text-sm whitespace-nowrap">{t('colVariation')}</th>
+                <th className="bg-purple-50 p-4 border-b-2 border-purple-400 text-purple-700 font-bold text-sm whitespace-nowrap">{t('colOption')}</th>
+                <th className="bg-purple-50 p-4 border-b-2 border-purple-400 text-purple-700 font-bold text-sm whitespace-nowrap">{t('colPrice')}</th>
+                <th className="bg-purple-50 p-4 border-b-2 border-purple-400 text-purple-700 font-bold text-sm whitespace-nowrap text-center">{t('colStock')}</th>
+                <th className="bg-purple-50 p-4 border-b-2 border-purple-400 text-purple-700 font-bold text-sm whitespace-nowrap text-center">{t('colActions')}</th>
               </tr>
             </thead>
+
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan="4" className="p-10 text-center text-purple-500 font-bold">
+                  <td colSpan="7" className="p-10 text-center text-purple-500 font-bold">
                     <div className="flex justify-center items-center gap-2">
-                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-purple-500"></div>
-                       กำลังโหลดข้อมูลสินค้า...
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-purple-500"></div>
+                      {t('loadingProducts')}
                     </div>
                   </td>
                 </tr>
               ) : myProducts.length === 0 ? (
                 <tr>
-                  <td colSpan="4" className="p-10 text-center text-gray-400 font-medium">คุณยังไม่มีสินค้าในระบบ กรุณากด "เพิ่มสินค้าใหม่"</td>
+                  <td colSpan="7" className="p-10 text-center text-gray-400 font-medium">{t('noProducts')}</td>
                 </tr>
               ) : (
-                myProducts.map(product => {
-                  const totalStock = product.variations && product.variations.length > 0
-                    ? product.variations.reduce((sum, variation) => {
-                        // ตรวจสอบว่ามี options ไหม ถ้ามีให้วนลูปบวก stock ใน options เข้าไปด้วย
-                        const optionsStock = variation.options 
-                          ? variation.options.reduce((optSum, opt) => optSum + (opt.stock || 0), 0) 
-                          : 0;
-                        return sum + optionsStock;
-                      }, 0)
-                    : product.stock ?? "ไม่ระบุ";
+                myProducts.map((product) => {
+                  const displayRows = product.has_variations && product.variations?.length > 0
+                    ? product.variations
+                    : [{ variation_name: "-", option_name: "-", stock: product.total_stock || 0, image: product.cover_image }];
 
-                  // จัดโครงสร้าง Category แบบย่อมาแสดงผล
-                  const catName = product.classification?.category?.split('/').pop() || "ไม่ได้ระบุหมวดหมู่";
-
-                  return (
-                    <tr key={product.id} className="hover:bg-gray-50 transition">
-                      
-                      <td className="p-4 border-b border-gray-100 align-middle">
-                        <div className="flex items-center gap-4">
-                          {/* ป้องกัน Error src="" ด้วย Fallback Image */}
-                          <img 
-                            src={product.product_images?.cover_image || product.images?.[0] || DEFAULT_PRODUCT} 
-                            alt={product.name} 
-                            className="w-12 h-12 rounded object-cover border border-gray-200 shadow-sm shrink-0" 
-                            onError={(e) => { e.target.src = DEFAULT_PRODUCT }}
-                          />
-                          <div>
-                            <p className="font-bold text-gray-800 text-sm md:text-base flex items-center gap-2">
-                              {product.name}
-                              {product.classification?.preorder && <span className="bg-orange-100 text-orange-600 text-[10px] px-2 py-0.5 rounded-full border border-orange-200">PRE</span>}
-                            </p>
-                            <p className="text-xs text-purple-500 font-medium mt-0.5">{catName}</p>
-                            <p className="text-[10px] text-gray-400 mt-0.5">ID: {product.id}</p>
-                          </div>
-                        </div>
-                      </td>
-                      
-                       <td className="p-4 border-b border-gray-100 align-middle">
-                        <span className="text-sm md:text-base text-gray-700">สีขาว</span>
-                      </td>
-
-                      <td className="p-4 border-b border-gray-100 align-middle">
-                        <span className="font-bold text-purple-600 text-lg">฿{product.price}</span>
-                      </td>
-                      
-                      <td className="p-4 border-b border-gray-100 align-middle">
-                        {product.variations && product.variations.length > 0 ? (
-                          <div>
-                            
-                            <p className="text-lg text-gray-500 mt-1"><span className="font-bold text-red-500">{totalStock}</span></p>
-                          </div>
-                        ) : (
-                          <div>
-                            
-                            <p className="text-lg text-gray-500 mt-1"><span className="font-bold text-red-500">{totalStock}</span></p>
+                  return displayRows.map((variant, vIdx) => (
+                    <tr key={`${product.id}-${vIdx}`} className="hover:bg-white transition border-b border-gray-100">
+                      <td className="p-4 align-top">
+                        {vIdx === 0 && (
+                          <div className="flex items-center gap-3">
+                            <img 
+                              src={product.cover_image || DEFAULT_PRODUCT} 
+                              alt={product.name} 
+                              className="w-12 h-12 rounded object-cover border border-gray-200"
+                              onError={(e) => { e.target.src = DEFAULT_PRODUCT }}
+                            />
+                            <div>
+                              <p className="font-bold text-gray-800 text-sm">{product.name}</p>
+                              {product.preorder && <span className="text-[10px] text-orange-600 font-bold">PRE-ORDER</span>}
+                            </div>
                           </div>
                         )}
                       </td>
-                      
-                      <td className="p-4 border-b border-gray-100 align-middle text-center">
-                        <div className="flex items-center justify-center gap-3 md:gap-4">
-                          <button onClick={() => setEditingId(product.id)} className="text-blue-500 font-bold text-sm hover:underline hover:text-blue-700 transition">แก้ไข (Edit)</button>
-                          
-                        </div>
-                         <div className="flex items-center justify-center gap-3 md:gap-4">
-                          
-                          <button onClick={() => handleDeleteClick(product)} className="text-red-500 font-bold text-sm hover:underline hover:text-red-700 transition">ลบ (Delete)</button>
-                        </div>
+
+                      <td className="p-4 align-middle text-center">
+                        {product.has_variations ? (
+                          <img 
+                            src={variant.image || DEFAULT_PRODUCT} 
+                            alt={variant.option_name} 
+                            className="w-10 h-10 rounded object-cover border border-gray-200 inline-block"
+                            onError={(e) => { e.target.src = DEFAULT_PRODUCT }}
+                          />
+                        ) : (
+                          <span className="text-sm text-gray-600">-</span>
+                        )}
                       </td>
-                      
+
+                      <td className="p-4 align-middle text-sm text-gray-600">
+                        {variant.variation_name}
+                      </td>
+
+                      <td className="p-4 align-middle text-sm text-gray-600">
+                        {variant.option_name}
+                      </td>
+
+                      <td className="p-4 align-middle">
+                        <span className="font-bold text-gray-800">฿{product.price}</span>
+                      </td>
+
+                      <td className="p-4 align-middle text-center">
+                        <span className={`font-bold ${variant.stock === 0 ? 'text-red-500' : 'text-gray-800'}`}>
+                          {variant.stock}
+                        </span>
+                      </td>
+
+                      <td className="p-4 align-middle text-center">
+                        {vIdx === 0 && (
+                          <div className="flex items-center justify-center gap-3">
+                            <button 
+                              onClick={() => setEditingId(product.product_id || product.id)} 
+                              className="text-blue-500 font-bold text-sm hover:underline"
+                            >
+                              {t('editBtn')}
+                            </button>
+                            <button 
+                              // 5. เปลี่ยนมาเรียกใช้ openDeleteModal แทนเช่นกัน
+                              onClick={() => openDeleteModal(product.id, product.name)}
+                              className="text-red-500 font-bold text-sm hover:underline"
+                            >
+                              {t('deleteBtnp')}
+                            </button>
+                          </div>
+                        )}
+                      </td>
                     </tr>
-                  );
+                  ));
                 })
               )}
             </tbody>
@@ -212,37 +301,51 @@ function SellerProduct({ user, eventData }) {
         </div>
       </div>
 
-
-                {/* --- Popup Modal --- */}
-{isModalOpen && (
-  <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-    {/* Overlay */}
-    <div className="absolute inset-0 bg-purple-900/40 backdrop-blur-sm" onClick={() => setIsModalOpen(false)}></div>
-    
-    <div className="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-sm overflow-hidden relative animate-pop-in border border-purple-100">
-      <div className="bg-purple-600 p-8 text-center text-white">
-        <div className="bg-white/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-          <span className="text-4xl">⚠️</span>
-        </div>
-        <h3 className="text-2xl font-black">ยืนยันการลบ?</h3>
-      </div>
-      
-      <div className="p-8 text-center">
-        <p className="text-gray-500 mb-2">คุณต้องการลบรายการนี้ใช่หรือไม่?</p>
-        <div className="bg-purple-50 p-4 rounded-2xl mb-8 border border-purple-100">
-            <p className="font-bold text-purple-700 text-lg">
-                🛍️ {deleteTarget?.name}
+      {/* 6. ตัว UI ของ Popup (Modal) แสดงผลเมื่อ deleteModal.isOpen เป็น true */}
+      {deleteModal.isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-50 px-4 backdrop-blur-sm transition-all">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 transform scale-100 animate-fade-in">
+            {/* ไอคอนถังขยะตกแต่ง */}
+            <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4">
+              <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </div>
+            
+            <h2 className="text-xl font-bold text-center text-gray-800 mb-2">
+              {t('confirmDelete')}
+            </h2>
+            <p className="text-center text-gray-500 mb-6 text-sm">
+              {t('wantedToDelete1')} <span className="font-bold text-gray-800">"{deleteModal.productName}"</span> {t('wantedToDelete2')}
+              <span className="text-xs text-red-400 mt-1 inline-block">{t('wantedToDelete')}</span>
             </p>
+            
+            <div className="flex gap-3 w-full">
+              <button
+                onClick={closeDeleteModal}
+                disabled={isDeleting}
+                className="flex-1 px-4 py-2.5 rounded-xl font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition disabled:opacity-50"
+              >
+                {t('cancelBtn')}
+              </button>
+              <button
+                onClick={executeDelete}
+                disabled={isDeleting}
+                className="flex-1 px-4 py-2.5 rounded-xl font-bold text-white bg-red-500 hover:bg-red-600 transition flex justify-center items-center gap-2 disabled:opacity-50"
+              >
+                {isDeleting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    {t('continueDelete')}
+                  </>
+                ) : (
+                  t('deleteBtnp')
+                )}
+              </button>
+            </div>
+          </div>
         </div>
-        
-        <div className="grid grid-cols-2 gap-4">
-          <button onClick={() => setIsModalOpen(false)} className="py-4 bg-gray-100 text-gray-600 font-bold rounded-2xl">ยกเลิก</button>
-          <button onClick={confirmDelete} className="py-4 bg-red-500 text-white font-bold rounded-2xl shadow-lg shadow-red-200">ยืนยันลบ</button>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
 
     </div>
   );

@@ -1,4 +1,4 @@
-// src/Seller/SellerApp.jsx
+//src/Seller/SellerApp.jsx
 import React, { useState } from 'react';
 import SellerSidebar from './SellerSidebar';
 import SellerStorePage from './SellerStorePage';
