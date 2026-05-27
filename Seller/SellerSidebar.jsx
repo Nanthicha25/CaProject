@@ -9,6 +9,7 @@ function SellerSidebar({ isOpen, setIsOpen, currentPage, setCurrentPage }) {
     { id: 'product', label: t('menuProduct'), icon: '📦' },
     { id: 'calculate', label: t('menuCalculate'), icon: '🧮' },
     { id: 'conclusion', label: t('menuConclusion'), icon: '📊' },
+    { id: 'queues', label: t('Queues'), icon: '📊' },
     { id: 'contact', label: t('menuContact'), icon: '📞' }
   ];
 

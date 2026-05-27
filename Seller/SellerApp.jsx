@@ -6,7 +6,7 @@ import SellerProduct from './SellerProduct';
 import SellerCalculate from './SellerCalculate';
 import SellerConclusion from './SellerConclusion';
 import SellerContact from './SellerContact';
-
+import Sellerqueues from './Sellerqueues';
 
 // รับ eventData มาจาก App.jsx
 function SellerApp({ user, isSidebarOpen, setIsSidebarOpen, eventData }) { 
@@ -26,6 +26,9 @@ function SellerApp({ user, isSidebarOpen, setIsSidebarOpen, eventData }) {
       
       case 'conclusion':
         return <SellerConclusion user={user} eventData={eventData} />;
+
+      case 'queues':
+        return <Sellerqueues user={user} eventData={eventData} />;
       
       case 'contact':
         return <SellerContact user={user} eventData={eventData} />;
