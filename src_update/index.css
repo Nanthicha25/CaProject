@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer utilities {
+  /* ซ่อน Scrollbar แต่ยังใช้เมาส์เลื่อนหรือปัดนิ้วได้ */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* สำหรับ IE และ Edge */
+    scrollbar-width: none;  /* สำหรับ Firefox */
+  }
+
+  /* แอนิเมชัน Slide Up */
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out forwards;
+  }
+}
+
+/* Keyframes สำหรับแอนิเมชัน */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
